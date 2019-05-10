@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.airmonitor.mapper.TbDataMapper" >
+  <resultMap id="BaseResultMap" type="com.airmonitor.pojo.TbData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="PM2" property="pm2" jdbcType="VARCHAR" />
+    <result column="AQI" property="aqi" jdbcType="VARCHAR" />
+    <result column="quality" property="quality" jdbcType="VARCHAR" />
+    <result column="PM10" property="pm10" jdbcType="VARCHAR" />
+    <result column="CO" property="co" jdbcType="VARCHAR" />
+    <result column="NO2" property="no2" jdbcType="VARCHAR" />
+    <result column="O3" property="o3" jdbcType="VARCHAR" />
+    <result column="SO2" property="so2" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="main" property="main" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cid, city, PM2, AQI, quality, PM10, CO, NO2, O3, SO2, time, createtime, main
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.airmonitor.pojo.TbDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.airmonitor.pojo.TbDataExample" >
+    delete from tb_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.airmonitor.pojo.TbData" >
+    insert into tb_data (id, cid, city, 
+      PM2, AQI, quality, 
+      PM10, CO, NO2, O3, 
+      SO2, time, createtime, 
+      main)
+    values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
+      #{pm2,jdbcType=VARCHAR}, #{aqi,jdbcType=VARCHAR}, #{quality,jdbcType=VARCHAR}, 
+      #{pm10,jdbcType=VARCHAR}, #{co,jdbcType=VARCHAR}, #{no2,jdbcType=VARCHAR}, #{o3,jdbcType=VARCHAR}, 
+      #{so2,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, 
+      #{main,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.airmonitor.pojo.TbData" >
+    insert into tb_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="pm2 != null" >
+        PM2,
+      </if>
+      <if test="aqi != null" >
+        AQI,
+      </if>
+      <if test="quality != null" >
+        quality,
+      </if>
+      <if test="pm10 != null" >
+        PM10,
+      </if>
+      <if test="co != null" >
+        CO,
+      </if>
+      <if test="no2 != null" >
+        NO2,
+      </if>
+      <if test="o3 != null" >
+        O3,
+      </if>
+      <if test="so2 != null" >
+        SO2,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="main != null" >
+        main,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="pm2 != null" >
+        #{pm2,jdbcType=VARCHAR},
+      </if>
+      <if test="aqi != null" >
+        #{aqi,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null" >
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="pm10 != null" >
+        #{pm10,jdbcType=VARCHAR},
+      </if>
+      <if test="co != null" >
+        #{co,jdbcType=VARCHAR},
+      </if>
+      <if test="no2 != null" >
+        #{no2,jdbcType=VARCHAR},
+      </if>
+      <if test="o3 != null" >
+        #{o3,jdbcType=VARCHAR},
+      </if>
+      <if test="so2 != null" >
+        #{so2,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="main != null" >
+        #{main,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.airmonitor.pojo.TbDataExample" resultType="java.lang.Integer" >
+    select count(*) from tb_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm2 != null" >
+        PM2 = #{record.pm2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aqi != null" >
+        AQI = #{record.aqi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quality != null" >
+        quality = #{record.quality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm10 != null" >
+        PM10 = #{record.pm10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.co != null" >
+        CO = #{record.co,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no2 != null" >
+        NO2 = #{record.no2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.o3 != null" >
+        O3 = #{record.o3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.so2 != null" >
+        SO2 = #{record.so2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.main != null" >
+        main = #{record.main,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_data
+    set id = #{record.id,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      city = #{record.city,jdbcType=VARCHAR},
+      PM2 = #{record.pm2,jdbcType=VARCHAR},
+      AQI = #{record.aqi,jdbcType=VARCHAR},
+      quality = #{record.quality,jdbcType=VARCHAR},
+      PM10 = #{record.pm10,jdbcType=VARCHAR},
+      CO = #{record.co,jdbcType=VARCHAR},
+      NO2 = #{record.no2,jdbcType=VARCHAR},
+      O3 = #{record.o3,jdbcType=VARCHAR},
+      SO2 = #{record.so2,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=VARCHAR},
+      main = #{record.main,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.airmonitor.pojo.TbData" >
+    update tb_data
+    <set >
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="pm2 != null" >
+        PM2 = #{pm2,jdbcType=VARCHAR},
+      </if>
+      <if test="aqi != null" >
+        AQI = #{aqi,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null" >
+        quality = #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="pm10 != null" >
+        PM10 = #{pm10,jdbcType=VARCHAR},
+      </if>
+      <if test="co != null" >
+        CO = #{co,jdbcType=VARCHAR},
+      </if>
+      <if test="no2 != null" >
+        NO2 = #{no2,jdbcType=VARCHAR},
+      </if>
+      <if test="o3 != null" >
+        O3 = #{o3,jdbcType=VARCHAR},
+      </if>
+      <if test="so2 != null" >
+        SO2 = #{so2,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="main != null" >
+        main = #{main,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.airmonitor.pojo.TbData" >
+    update tb_data
+    set cid = #{cid,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      PM2 = #{pm2,jdbcType=VARCHAR},
+      AQI = #{aqi,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=VARCHAR},
+      PM10 = #{pm10,jdbcType=VARCHAR},
+      CO = #{co,jdbcType=VARCHAR},
+      NO2 = #{no2,jdbcType=VARCHAR},
+      O3 = #{o3,jdbcType=VARCHAR},
+      SO2 = #{so2,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      main = #{main,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="findAllByCid"  resultMap="BaseResultMap">
+		
+	SELECT a.`PM2`,a.`PM10`,a.`CO`,a.`NO2`,a.`O3`,a.`SO2`, DATE_FORMAT(a.`createtime`,'%H:%i') createtime 
+	FROM tb_data a 
+	WHERE a.cid=#{cid,jdbcType=INTEGER} 
+	AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{dates,jdbcType=VARCHAR} 
+  </select>
+    <select id="findRealData"  resultMap="BaseResultMap">
+    SELECT a.`PM2`,a.`PM10`,a.`CO`,a.`NO2`,a.`O3`,a.`SO2`, DATE_FORMAT(a.`createtime`,'%Y-%m-%d %H:%i') createtime 
+	FROM tb_data a 
+	WHERE a.cid=#{cid,jdbcType=INTEGER} 
+	AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{dates,jdbcType=VARCHAR} 
+	ORDER BY a.createtime DESC LIMIT 0,15
+  </select>
+    <select id="findHistoryData"  resultMap="BaseResultMap">
+    SELECT a.`PM2`,a.`PM10`,a.`CO`,a.`NO2`,a.`O3`,a.`SO2`, DATE_FORMAT(a.`createtime`,'%Y-%m-%d %H:%i') createtime 
+	FROM tb_data a 
+	WHERE a.cid=#{cid,jdbcType=INTEGER} 
+	AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{dates,jdbcType=VARCHAR} 
+	ORDER BY a.createtime DESC 
+  </select>
+    <select id="findBingData"  resultMap="BaseResultMap">
+    SELECT AVG(a.`PM2`) pm2,AVG(a.`PM10`) pm10,AVG(a.`CO`) co,AVG(a.`NO2`) no2,AVG(a.`O3`) o3,AVG(a.`SO2`) so2
+	FROM tb_data a 
+	WHERE a.cid=#{cid,jdbcType=INTEGER}  
+	AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{dates,jdbcType=VARCHAR} ORDER BY a.createtime DESC ;
+  </select>
+    <select id="findZhuData"  resultMap="BaseResultMap">
+     SELECT MAX(a.pm2) pm2,MAX(a.aqi) aqi,MAX(a.quality) quality,MAX(a.pm10) pm10,
+		MAX(a.co) co,MAX(a.no2) no2,MAX(a.o3) o3,MAX(a.so2) so2,DATE_FORMAT(a.`createtime`,'%H:00') `createtime` 
+		FROM tb_data a 
+		WHERE  a.cid = #{cid,jdbcType=INTEGER} 
+		AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{dates,jdbcType=VARCHAR}
+		GROUP BY DATE_FORMAT(a.`createtime`,'%Y-%m-%d %H')
+  </select>
+  <select id="findDataObject" resultType="map">
+  	  SELECT MAX(a.pm2) pm2,MAX(a.aqi) aqi,MAX(a.quality) quality,MAX(a.pm10) pm10,
+		MAX(a.co) co,MAX(a.no2) no2,MAX(a.o3) o3,MAX(a.so2) so2,DATE_FORMAT(a.`time`,'%h:00') `time` 
+		FROM tb_data a 
+  </select>
+</mapper>
