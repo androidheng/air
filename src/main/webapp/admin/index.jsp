@@ -77,7 +77,7 @@
                                 <em>数据</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/homeWork.jsp">实时数据</a></dd>
+                                <dd><a href="<%=basePath%>admin/realTimeData.jsp">实时数据</a></dd>
                                 <dd><a href="<%=basePath%>admin/historyData.jsp">历史数据</a></dd>
                                 <dd><a href="<%=basePath%>admin/pieChart.jsp">饼状图</a></dd>
                                 <dd><a href="<%=basePath%>admin/histogram.jsp">柱状图</a></dd>

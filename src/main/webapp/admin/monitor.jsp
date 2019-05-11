@@ -206,16 +206,15 @@
         ,content: $("#box")
         ,yes: function(layero){
            layer.close(layero);
-           //clearInterval(timer)
+           clearInterval(timer)
         },
         success:function(){
-        	getAirData()
-        	//timer = setInterval("getAirData()",1000)  //1000 获取空气数据的 周期 1000表示1秒
+        	timer = setInterval(getAirData,10000)  //1000 获取空气数据的 周期 1000表示1秒
         }
         ,end:function(layero){
             layer.close(layero) 
             $("#box").hide()
-          // clearInterval(timer)
+           clearInterval(timer)
         }
       });
     

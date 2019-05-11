@@ -38,6 +38,34 @@
     <title>管理后台</title>
 </head>
 <body class="layui-view-body">
+    <div class="layui-content" id="box" style="display:none">
+        <div class="container">
+             <div class="dataItem">
+                   <p>pm25</p>
+                   <div class="pm25"><span>0</span>mg/m<sup>3</sup></div>
+             </div>
+             <div class="dataItem">
+                   <p>pm10</p>
+                   <div class="pm10"><span>0</span>mg/m<sup>3</sup></div>
+             </div>
+             <div class="dataItem">
+                   <p>co</p>
+                   <div class="co"><span>0</span>mg/m<sup>3</sup></div>
+              </div>
+              <div class="dataItem">
+                  <p>o3</p>
+                  <div class="o3"><span>0</span>mg/m<sup>3</sup></div>
+              </div>
+              <div class="dataItem">
+                   <p>so2</p>
+                   <div class="so2"><span>0</span>mg/m<sup>3</sup></div>
+              </div>
+              <div class="dataItem">
+                   <p>no2</p>
+                   <div class="no2"><span>0</span>mg/m<sup>3</sup></div>
+             </div>
+         </div>
+    </div>
     <div class="layui-content">
         <div class="layui-page-header">
             <div class="pagewrap">
@@ -56,43 +84,13 @@
                                                                               数据类型
                          <div class="layui-inline">
                           <form class="layui-form" action="">
-                            <select  id="datatype" lay-verify="required"></select>
+                            <select  id="cid" lay-verify="required"></select>
                          </form>
                         </div>
                         </div>
                       <button class="layui-btn" id="search">查询</button>
                     </div>
-                     <div class="container">
-                           <div class="dataItem">
-                              <p>pm25</p>
-                              <div class="pm25"><span>0</span>mg/m<sup>3</sup></div>
-                              
-                           </div>
-                          <div class="dataItem">
-                              <p>pm10</p>
-                              <div class="pm10"><span>0</span>mg/m<sup>3</sup></div>
-                              
-                           </div>
-                           <div class="dataItem">
-                              <p>co</p>
-                              <div class="co"><span>0</span>mg/m<sup>3</sup></div>
-                              
-                           </div>
-                           <div class="dataItem">
-                              <p>o3</p>
-                              <div class="o3"><span>0</span>mg/m<sup>3</sup></div>
-                              
-                           </div>
-                           <div class="dataItem">
-                              <p>so2</p>
-                              <div class="so2"><span>0</span>mg/m<sup>3</sup></div>
-                              
-                           </div>
-                           <div class="dataItem">
-                              <p>no2</p>
-                              <div class="no2"><span>0</span>mg/m<sup>3</sup></div>
-                           </div>
-                     </div>
+                     
                     <table id="demo" lay-filter="demo" ></table>
                 </div>
             </div>
@@ -126,7 +124,7 @@
                     	 options+="<option value='" + item.id + "'>" + item.city + "</option>";
                      })
                     
-                     $("#datatype").html(options)
+                     $("#cid").html(options)
                      
                    
                      renderForm()
@@ -138,11 +136,40 @@
          }
          //查询
          $(document).on('click','#search',function(){
-        	 getdata()
+        	 let cid = $("#cid").val()
+        	 if(!cid) return alert('请先选择城市');
+        	 openDilog()
          });
+         function openDilog(){
+             let timer = 0
+             layer.open({
+               type: 1
+              ,title: false //不显示标题栏
+              ,closeBtn: true
+              ,area: '800px'
+              ,shade: 0.8
+              ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+              ,btn: ['确定']
+              ,btnAlign: 'c'
+              ,moveType: 1 //拖拽模式，0或者1
+              ,content: $("#box")
+              ,yes: function(layero){
+                 layer.close(layero);
+                 clearInterval(timer)
+              },
+              success:function(){
+              	timer = setInterval(getdata,10000)  //1000 获取空气数据的 周期 1000表示1秒
+              }
+              ,end:function(layero){
+                  layer.close(layero) 
+                  $("#box").hide()
+                  clearInterval(timer)
+              }
+            });
+          
+          }
          function getdata(){
-        	 let cid = $("#datatype").val()
-        	 console.log(cid)
+        	 let cid = $("#cid").val()	
         	 $.ajax({
                  url:"<%=basePath%>data/cityMonitor?cid="+cid,
                  type:'post',//method请求方式，get或者post
