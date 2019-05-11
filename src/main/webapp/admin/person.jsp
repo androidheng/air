@@ -11,28 +11,29 @@
 </head>
 <body class="layui-view-body">
      <div class="layui-content" id="box" style="display:none">
-        <div class="layui-form" style="padding:10px 0px;background:#fff;margin-top:50px;"></form>
-            <div class="layui-form-item">
-              <label class="layui-form-label">用户名</label>
-              <div class="layui-input-block">
-                 <input id='userName' name="username" type="text" value="">
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">密码</label>
-              <div class="layui-input-block">
-                 <input id='password' name="password" type="password" value="">
-              </div>
-            </div>
-            <div class="layui-form-item">
+          <form class="layui-form" action="" lay-filter="formTest">
+           <div class="layui-form-item">
+               <label class="layui-form-label">用户名</label>
+               <div class="layui-input-block">
+                  <input type="text" name="username" id="userName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+               </div>
+           </div>
+           <div class="layui-form-item">
+             <label class="layui-form-label">密码</label>
+                 <div class="layui-input-inline">
+                   <input type="password" name="password" id="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                 </div>
+           </div>
+           <div class="layui-form-item">
               <label class="layui-form-label">用户所属站点</label>
-              <div class="layui-input-block">
+                <div class="layui-input-block">
                    <select name="cid" id="cid" lay-verify="city" lay-filter="cityList">
                     
                   </select>
-              </div>
-            </div>
-        </div>	
+               </div>
+           </div>
+        </form>
+       
      </div>
     <div class="layui-content">
         <div class="layui-page-header">
@@ -68,8 +69,7 @@
    
     <script>
   layui.use('table', function(){
-    
-     var table = layui.table,form = layui.form,$=layui.$;
+      var table = layui.table,form = layui.form,$=layui.$;
        //展示已知数据
        table.render({
            elem: '#demo'
@@ -107,7 +107,7 @@
                    	 options+="<option value='" + item.id + "'>" + item.city + "</option>";
                     })
                    
-                    $("#cid").append(options)
+                    $("#cid").html(options)
                     
                     if(data){
                     	$('#userName').val(data.username);
@@ -163,6 +163,7 @@
   	        	getoption(data)
   	        }
   	       ,end:function(index){
+  	    	    $("#box").hide()
   	        	layer.close(index)
   	        }
   	      });

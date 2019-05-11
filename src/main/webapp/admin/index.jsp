@@ -71,9 +71,9 @@
                             </a>
                             <dl class="layui-nav-child">
                                 <dd><a href="<%=basePath%>admin/homeWork.jsp">实时数据</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">历史数据</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">饼状图</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">柱状图</a></dd>
+                                <dd><a href="<%=basePath%>admin/historyData.jsp">历史数据</a></dd>
+                                <dd><a href="<%=basePath%>admin/pieChart.jsp">饼状图</a></dd>
+                                <dd><a href="<%=basePath%>admin/histogram.jsp">柱状图</a></dd>
                             </dl>
                     </li>  
                      <li class="layui-nav-item">
@@ -94,7 +94,7 @@
                             </a>
                             <dl class="layui-nav-child">
                                 <dd><a href="<%=basePath%>admin/homeWork.jsp">数据监控</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">地图场景</a></dd>
+                                <dd><a href="<%=basePath%>admin/monitor.jsp">地图场景</a></dd>
                             </dl>
                     </li>    
                    
