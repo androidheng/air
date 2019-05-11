@@ -21,7 +21,7 @@
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                   <a>首页</a>
-                  <a>用户管理</a>
+                  <a>柱状图</a>
                 </span>
                 
             </div>

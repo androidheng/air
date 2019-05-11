@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="<%=basePath%>assets/css/layui.css">
     <link rel="stylesheet" href="<%=basePath%>assets/css/admin.css">
     <link rel="icon" href="/favicon.ico">
+    <style type="text/css">
+        .sysName{
+          
+        }
+    </style>
     <title>管理后台</title>
 </head>
 <body class="layui-layout-body">
@@ -18,7 +23,9 @@
             
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item slide-sidebar" lay-unselect>
+                    
                     <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
+                    
                 </li>
             </ul>
             <ul class="layui-nav layui-layout-right">
@@ -37,7 +44,7 @@
 
                 <div class="custom-logo">
                     <img src="<%=basePath%>assets/images/logo.png" alt=""/>
-                    <h1>后台管理系统</h1>
+                    <h1 style="font-size:16px;">空气质量监测与预警系统</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
@@ -54,7 +61,7 @@
                     </li>  
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon">&#xe612;</i>
+                                <i class="layui-icon layui-icon-release">&#xe609;</i>
                                 <em>预警</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -66,7 +73,7 @@
                     </li>  
                      <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon">&#xe612;</i>
+                                <i class="layui-icon layui-icon-chart">&#xe62c;</i>
                                 <em>数据</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -78,7 +85,7 @@
                     </li>  
                      <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon">&#xe612;</i>
+                                <i class="layui-icon layui-icon-chart-screen">&#xe629;</i>
                                 <em>报表</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -89,7 +96,7 @@
                     </li>
                      <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon">&#xe612;</i>
+                                <i class="layui-icon layui-icon-water">&#xe636;</i>
                                 <em>监控</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -97,11 +104,7 @@
                                 <dd><a href="<%=basePath%>admin/monitor.jsp">地图场景</a></dd>
                             </dl>
                     </li>    
-                   
-                   
-                   
-                   
-                </ul>
+                 </ul>
            </div>
         </div>
 
