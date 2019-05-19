@@ -2,6 +2,8 @@ package com.airmonitor.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.airmonitor.mapper.TbParamsMapper;
@@ -87,7 +89,9 @@ public class ParamsServiceImpl implements ParamsService {
 		Criteria criteria = example.createCriteria();
 		
 		if(params!=null){			
-				
+			if(!StringUtils.isEmpty(params.getBid())) {
+				criteria.andBidEqualTo(params.getBid());
+			}
 		}
 		
 		Page<TbParams> page= (Page<TbParams>)paramsMapper.selectByExample(example);		

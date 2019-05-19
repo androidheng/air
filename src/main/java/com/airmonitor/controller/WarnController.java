@@ -161,6 +161,7 @@ public class WarnController {
 		}
 		return warnService.findPage(warn, page, limit);		
 	}
+	   @ResponseBody
 		@RequestMapping(value="/searchAir",produces = "application/json;charset=UTF-8")
 		public Object searchAir(String date,HttpSession session,String cid){
 			TbUser user=(TbUser) session.getAttribute("user");
@@ -193,6 +194,7 @@ public class WarnController {
 			}
 			return new Result(false, "请先登录");
 		}
+	   @ResponseBody
 		@RequestMapping(value="/searchAir2",produces = "application/json;charset=UTF-8")
 		public PageResult searchAir2(String date,HttpSession session,String cid,int page,int limit){
 			TbUser user=(TbUser) session.getAttribute("user");

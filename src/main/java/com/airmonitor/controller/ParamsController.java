@@ -130,7 +130,11 @@ public class ParamsController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbParams params, int page, int limit  ){
+	public PageResult search(String key , int page, int limit  ){
+		TbParams params=new TbParams();
+		if(!StringUtils.isEmpty(key)) {
+			params.setBid(Integer.parseInt(key));	
+		}
 		return paramsService.findPage(params, page, limit);		
 	}
 	
