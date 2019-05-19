@@ -105,8 +105,6 @@ public class DataController {
 	public Object realtime(HttpSession session,String cid,String type){
 		String dates=DateUtils.getCurrentDay();
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){ 
 			if(user.getType()==0) {
@@ -208,8 +206,6 @@ public class DataController {
 		if(StringUtils.isEmpty(dates))
 		  dates=DateUtils.getCurrentDay();
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){ 
 			if(user.getType()==0) {
@@ -367,8 +363,6 @@ public class DataController {
 	@RequestMapping(value="/searchHistory",produces = "application/json;charset=UTF-8")
 	public Object searchHistory(String dates,HttpSession session,String cid,String type){
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){
 			if(user.getType()==0) {
@@ -577,8 +571,6 @@ public class DataController {
 	@RequestMapping("/findBingData")
 	public Object findBingData(String cid,String dates,HttpSession session) {
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){
 			if(user.getType()==0) {
@@ -624,8 +616,6 @@ public class DataController {
 	@RequestMapping("/findZhuData")
 	public Object findZhuData(String cid,String dates,HttpSession session,String type) {
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){
 			if(user.getType()==0) {
@@ -687,8 +677,6 @@ public class DataController {
 	@RequestMapping(value="/baobiao",produces = "application/json;charset=UTF-8")
 	public PageResult baobiao(String date,HttpSession session,String cid,String type,int page,int limit){
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		//TbUser user=(TbUser) session.getAttribute("user");
 		if(user!=null){
@@ -717,8 +705,6 @@ public class DataController {
 		if(StringUtils.isEmpty(date))
 		  date=DateUtils.getCurrentDay();
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){ 
 			if(user.getType()==0) {

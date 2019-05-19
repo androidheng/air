@@ -165,8 +165,6 @@ public class WarnController {
 		@RequestMapping(value="/searchAir",produces = "application/json;charset=UTF-8")
 		public Object searchAir(String date,HttpSession session,String cid){
 			TbUser user=(TbUser) session.getAttribute("user");
-			user=new TbUser();
-			user.setType(1);
 			String searchId;
 			if(user!=null){
 				if(user.getType()==0) {
@@ -198,8 +196,6 @@ public class WarnController {
 		@RequestMapping(value="/searchAir2",produces = "application/json;charset=UTF-8")
 		public PageResult searchAir2(String date,HttpSession session,String cid,int page,int limit){
 			TbUser user=(TbUser) session.getAttribute("user");
-			user=new TbUser();
-			user.setType(1);
 			String searchId;
 			if(user!=null){
 				if(user.getType()==0) {
