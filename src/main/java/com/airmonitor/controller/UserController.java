@@ -140,7 +140,7 @@ public class UserController {
 	 * @param rows
 	 * @return
 	 */
-	@RequestMapping("/search")
+	@RequestMapping("/search") 
 	public PageResult search(String key, int page, int limit  ){
 		TbUser user=null;
 		if(!StringUtils.isEmpty(key)) {
