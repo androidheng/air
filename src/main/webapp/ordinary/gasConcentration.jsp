@@ -30,11 +30,7 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                      <div class="demoTable">
-                                                                        城市：
-                      <div class="layui-inline">
-                          <form class="layui-form" action="">
-                             <select  id="cid" lay-verify="required"></select>
-                          </form></div>
+                                                               
                                                                    日期：
                       <div class="layui-inline">
                          <input type="text" id="date"  class="layui-input">  
@@ -82,40 +78,7 @@
     });
     layui.use('table', function(){
     	 var table = layui.table,form = layui.form,$=layui.$;
-    	
-    	 getCity()
-         function renderForm(){
-          layui.use('form', function(){
-          var form = layui.form;//高版本建议把括号去掉，有的低版本，需要加()
-          form.render();
-          });
-         }
-    	 
-    	 //获取城市下拉框
-    	 function getCity(){
-    		 $.ajax({
-                 url:"<%=basePath%>city/findAll",
-                 type:'post',//method请求方式，get或者post
-                 dataType:'json',//预期服务器返回的数据类型
-                 contentType: "application/json; charset=utf-8",
-                 success:function(res){//res为相应体,function为回调函数
-                	
-                     let options = "<option value=''></option>"
-                     res.forEach(item=>{
-                    	 options+="<option value='" + item.id + "'>" + item.city + "</option>";
-                     })
-                    
-                     $("#cid").html(options)
-                     
-                   
-                     renderForm()
-                 },
-                 error:function(){
-                  
-                 }
-             });
-    	 }
-         //查询
+    	 //查询
          $(document).on('click','#search',function(){
         	 getdata()
          });
@@ -123,7 +86,7 @@
         	 let cid = $("#cid").val()
         	 let date = $("#date").val()
         	 $.ajax({
-                 url:"<%=basePath%>warn/searchAir?cid="+cid+"&date="+date,
+                 url:"<%=basePath%>warn/searchAir?date="+date,
                  type:'post',//method请求方式，get或者post
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
