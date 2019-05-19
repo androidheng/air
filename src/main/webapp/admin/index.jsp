@@ -55,7 +55,7 @@
                             <dl class="layui-nav-child">
                                 <dd><a href="<%=basePath%>admin/person.jsp">用户管理</a></dd>
                                 <dd><a href="<%=basePath%>admin/address.jsp">站点管理</a></dd>
-                                <dd><a href="<%=basePath%>admin/warning.jsp">报警管理</a></dd>
+                                <!-- <dd><a href="<%=basePath%>admin/warning.jsp">报警管理</a></dd> -->
                                 <dd><a href="<%=basePath%>admin/parames.jsp">参数管理</a></dd>
                             </dl>
                     </li>  
@@ -65,9 +65,9 @@
                                 <em>预警</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/homeWork.jsp">气体浓度</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">报警状态</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">实时变化趋势</a></dd>
+                                <dd><a href="<%=basePath%>admin/gasConcentration.jsp">气体浓度</a></dd>
+                                <dd><a href="<%=basePath%>admin/warningStadus.jsp">报警状态</a></dd>
+                                <!-- <dd><a href="<%=basePath%>admin/homeWork.jsp">实时变化趋势</a></dd> -->
                                
                             </dl>
                     </li>  
@@ -89,9 +89,9 @@
                                 <em>报表</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/homeWork.jsp">日报表</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">月报表</a></dd>
-                                <dd><a href="<%=basePath%>admin/jobInformation.jsp">年报表</a></dd>
+                                <dd><a href="<%=basePath%>admin/dateReport.jsp">日报表</a></dd>
+                                <dd><a href="<%=basePath%>admin/monthReport.jsp">月报表</a></dd>
+                                <dd><a href="<%=basePath%>admin/yearReport.jsp">年报表</a></dd>
                             </dl>
                     </li>
                      <li class="layui-nav-item">
