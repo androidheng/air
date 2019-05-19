@@ -389,4 +389,22 @@
 		MAX(a.co) co,MAX(a.no2) no2,MAX(a.o3) o3,MAX(a.so2) so2,DATE_FORMAT(a.`time`,'%h:00') `time` 
 		FROM tb_data a 
   </select>
+    <select id="findDay"  resultMap="BaseResultMap">
+    SELECT * FROM tb_data a 
+    WHERE a.cid=#{cid,jdbcType=INTEGER}  
+    AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{date,jdbcType=VARCHAR}
+    ORDER BY a.`createtime` DESC
+  </select>
+    <select id="findMonth"  resultMap="BaseResultMap">
+    SELECT * FROM tb_data a 
+    WHERE a.cid=#{cid,jdbcType=INTEGER}  
+    AND DATE_FORMAT(a.`createtime`,'%Y-%m')=#{date,jdbcType=VARCHAR}
+    ORDER BY a.`createtime` DESC
+  </select>
+    <select id="findYear"  resultMap="BaseResultMap">
+    SELECT * FROM tb_data a 
+    WHERE a.cid=#{cid,jdbcType=INTEGER}  
+    AND DATE_FORMAT(a.`createtime`,'%Y')=#{date,jdbcType=VARCHAR}
+    ORDER BY a.`createtime` DESC
+  </select>
 </mapper>

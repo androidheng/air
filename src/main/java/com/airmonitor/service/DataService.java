@@ -85,5 +85,8 @@ public interface DataService {
 
 
 	public List<TbData> findZhuData(int cid, String dates);
+
+
+	public PageResult baobiao(String type, String cid, String date,int page,int limit);
 	
 }

@@ -683,4 +683,113 @@ public class DataController {
 	            e.printStackTrace();  
 	        }
 	}
+	
+	@RequestMapping(value="/baobiao",produces = "application/json;charset=UTF-8")
+	public PageResult baobiao(String date,HttpSession session,String cid,String type,int page,int limit){
+		TbUser user=(TbUser) session.getAttribute("user");
+		user=new TbUser();
+		user.setType(1);
+		String searchId;
+		//TbUser user=(TbUser) session.getAttribute("user");
+		if(user!=null){
+			if(user.getType()==0) {
+				searchId=user.getCid()+"";
+			}else {
+				searchId=cid;
+			}	
+			if(StringUtils.isEmpty(type)) {
+				type="0";
+			}
+			if(StringUtils.isEmpty(date)) {
+				date=DateUtils.getCurrentDay();
+			}
+			
+			return dataService.baobiao(type,searchId,date,page,limit);
+		}
+		
+		return null		;
+	}
+	
+	@RequestMapping("/exportbaobiao")
+	@ResponseBody
+	public void exportbaobiao(HttpServletRequest request,HttpServletResponse response,HttpSession session,String cid,String type,String date) throws Exception{
+		List<Map<String,Object>> lists=new ArrayList<>();
+		if(StringUtils.isEmpty(date))
+		  date=DateUtils.getCurrentDay();
+		TbUser user=(TbUser) session.getAttribute("user");
+		user=new TbUser();
+		user.setType(1);
+		String searchId;
+		if(user!=null){ 
+			if(user.getType()==0) {
+				searchId=user.getCid()+"";
+			}else {
+				searchId=cid;
+			}	
+			PageResult pageResult = baobiao(date, session, cid, type, 1, 10000);
+			List<TbData> datas = pageResult.getData();
+			int i=0;
+			for(TbData d:datas){
+				Map<String, Object> map=new HashMap<>();
+					map.put("id", ++i);
+					map.put("pm2.5", d.getPm2());
+					map.put("pm10", d.getPm10());
+					map.put("so2", d.getSo2());
+					map.put("co", d.getCo());
+					map.put("no2", d.getNo2());
+					map.put("o3", d.getO3());
+					map.put("aqi", d.getAqi());
+					map.put("main", d.getMain());
+				map.put("createtime", d.getCreatetime());
+				lists.add(map);
+			}
+		
+			List<ExcelBean> excel = new ArrayList<>();
+			Map<Integer,List<ExcelBean>> map = new LinkedHashMap<>();
+			//设置标题栏
+			excel.add(new ExcelBean("编号","id",0));
+			excel.add(new ExcelBean("pm2.5","pm2.5",0));
+			excel.add(new ExcelBean("pm10","pm10",0));
+			excel.add(new ExcelBean("so2","so2",0));
+			excel.add(new ExcelBean("co","co",0));
+			excel.add(new ExcelBean("no2","no2",0));
+			excel.add(new ExcelBean("o3","o3",0));
+			excel.add(new ExcelBean("aqi","aqi",0));
+			excel.add(new ExcelBean("main","main",0));
+			excel.add(new ExcelBean("时间","createtime",0));
+			map.put(0,excel);
+			String sheetName = System.currentTimeMillis()+"数据信息";
+			//调用ExcelUtil方法
+			XSSFWorkbook xssfWorkbook = null;
+			try {
+				xssfWorkbook = ExcelUtil.createExcelFile(CityData.class, lists, map, sheetName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			System.out.println(xssfWorkbook);
+			
+			
+			
+			response.reset(); //清除buffer缓存  
+			//Map<String,Object> map=new HashMap<String,Object>();  
+			// 指定下载的文件名  
+			response.setContentType("application/vnd.ms-excel;charset=UTF-8");  
+			String name=System.currentTimeMillis()+"";
+			response.setHeader("Content-Disposition","attachment;filename="+new String((name+".xlsx").getBytes(),"iso-8859-1"));
+			//导出Excel对象  
+			XSSFWorkbook workbook = xssfWorkbook;
+			OutputStream output;  
+			try {  
+				output = response.getOutputStream();  
+				BufferedOutputStream bufferedOutput = new BufferedOutputStream(output);  
+				bufferedOutput.flush();  
+				workbook.write(bufferedOutput);  
+				bufferedOutput.close();  
+			} catch (IOException e) {  
+				e.printStackTrace();  
+			}
+		}   
+		
+	}
+
 }

@@ -177,5 +177,20 @@ public class DataServiceImpl implements DataService {
 		public List<TbData> findZhuData(int cid, String dates) {
 			return dataMapper.findZhuData(cid, dates);
 		}
+
+		@Override
+		public PageResult baobiao(String type, String cid, String date,int pageNum,int pageSize) {
+			PageHelper.startPage(pageNum, pageSize);
+			if(type.equals("0")) {
+				Page<TbData> page= (Page<TbData>)dataMapper.findDay(Integer.parseInt(cid), date);
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}else if(type.equals("1")) {
+				Page<TbData> page= (Page<TbData>)dataMapper.findMonth(Integer.parseInt(cid), date);
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}else{
+				Page<TbData> page= (Page<TbData>)dataMapper.findYear(Integer.parseInt(cid), date);
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}
+		}
 	
 }

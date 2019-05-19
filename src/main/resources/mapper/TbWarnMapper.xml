@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.airmonitor.mapper.TbWarnMapper" >
+  <resultMap id="BaseResultMap" type="com.airmonitor.pojo.TbWarn" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="levels" property="levels" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="VARCHAR" />
+    <result column="endtime" property="endtime" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="bname" property="bname" jdbcType="VARCHAR" />
+    <result column="nums" property="nums" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, levels, pid, cid, cname, reason, starttime, endtime, createtime, bid, bname, 
+    nums
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.airmonitor.pojo.TbWarnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_warn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_warn
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_warn
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.airmonitor.pojo.TbWarnExample" >
+    delete from tb_warn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.airmonitor.pojo.TbWarn" >
+    insert into tb_warn (id, levels, pid, 
+      cid, cname, reason, 
+      starttime, endtime, createtime, 
+      bid, bname, nums)
+    values (#{id,jdbcType=INTEGER}, #{levels,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, 
+      #{bid,jdbcType=INTEGER}, #{bname,jdbcType=VARCHAR}, #{nums,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.airmonitor.pojo.TbWarn" >
+    insert into tb_warn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="levels != null" >
+        levels,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="bname != null" >
+        bname,
+      </if>
+      <if test="nums != null" >
+        nums,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="levels != null" >
+        #{levels,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="bname != null" >
+        #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="nums != null" >
+        #{nums,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.airmonitor.pojo.TbWarnExample" resultType="java.lang.Integer" >
+    select count(*) from tb_warn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_warn
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.levels != null" >
+        levels = #{record.levels,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bname != null" >
+        bname = #{record.bname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nums != null" >
+        nums = #{record.nums,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_warn
+    set id = #{record.id,jdbcType=INTEGER},
+      levels = #{record.levels,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=VARCHAR},
+      endtime = #{record.endtime,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=VARCHAR},
+      bid = #{record.bid,jdbcType=INTEGER},
+      bname = #{record.bname,jdbcType=VARCHAR},
+      nums = #{record.nums,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.airmonitor.pojo.TbWarn" >
+    update tb_warn
+    <set >
+      <if test="levels != null" >
+        levels = #{levels,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="bname != null" >
+        bname = #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="nums != null" >
+        nums = #{nums,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.airmonitor.pojo.TbWarn" >
+    update tb_warn
+    set levels = #{levels,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      cname = #{cname,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      bid = #{bid,jdbcType=INTEGER},
+      bname = #{bname,jdbcType=VARCHAR},
+      nums = #{nums,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAirData" resultMap="BaseResultMap">
+  	select * from tb_warn 
+  	where cid = #{cid,jdbcType=INTEGER}
+  	and date_format('%Y-%m-%d',createtime) = #{date,jdbcType=VARCHAR}
+  	ORDER BY `createtime` DESC LIMIT 0,15
+  </select>
+</mapper>

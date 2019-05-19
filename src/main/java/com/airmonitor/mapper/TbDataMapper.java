@@ -39,6 +39,12 @@ public interface TbDataMapper {
     List<TbData> findBingData(@Param("cid") Integer cid,@Param("dates") String dates);
     
     List<TbData> findZhuData(@Param("cid") Integer cid,@Param("dates") String dates);
+    
+    List<TbData> findDay(@Param("cid") Integer cid,@Param("date") String date);
+    
+    List<TbData> findMonth(@Param("cid") Integer cid,@Param("date") String date);
+    
+    List<TbData> findYear(@Param("cid") Integer cid,@Param("date") String date);
 
 //    List<Map<String, Object>> findExcelRealData(@Param("cid") Integer cid,@Param("dates") String dates);
     
