@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="<%=basePath%>assets/css/layui.css">
     <link rel="stylesheet" href="<%=basePath%>assets/css/login.css">
     <link rel="icon" href="/favicon.ico">
+    <style>
+          body{
+        
+         background-image: url('<%=basePath%>assets/images/bg.jpg');
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+       }
+    </style>
     <title>管理后台</title>
 </head>
 <body class="login-wrap">
