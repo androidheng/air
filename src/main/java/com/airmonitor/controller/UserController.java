@@ -1,21 +1,18 @@
 package com.airmonitor.controller;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import com.airmonitor.pojo.TbCity;
 import com.airmonitor.pojo.TbUser;
 import com.airmonitor.service.CityService;
 import com.airmonitor.service.UserService;
-import com.airmonitor.vo.UserVo;
 
 import entity.PageResult;
 import entity.Result;

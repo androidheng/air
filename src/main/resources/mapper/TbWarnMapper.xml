@@ -321,7 +321,7 @@
   <select id="findAirData" resultMap="BaseResultMap">
   	select * from tb_warn 
   	where cid = #{cid,jdbcType=INTEGER}
-  	and date_format('%Y-%m-%d',createtime) = #{date,jdbcType=VARCHAR}
+  	and DATE_FORMAT(createtime,'%Y-%m-%d') = #{date,jdbcType=VARCHAR}
   	ORDER BY `createtime` DESC LIMIT 0,15
   </select>
 </mapper>
