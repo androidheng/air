@@ -21,7 +21,7 @@
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                   <a>首页</a>
-                  <a>历史数据</a>
+                  <a>实时数据</a>
                 </span>
             </div>
         </div>
@@ -29,12 +29,7 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                      <div class="demoTable">
-                                                                        城市：
-                      <div class="layui-inline">
-                          <form class="layui-form" action="">
-                             <select  id="cid" lay-verify="required"></select>
-                          </form>
-                      </div>
+                                                                
                                                                  
                         <div class="layui-inline">
                                                                           数据类型                                                
@@ -84,7 +79,7 @@
     	 var table = layui.table,form = layui.form,$=layui.$;
     	 //重新渲染表单
     	 getDataType()
-    	 getCity()
+    	
          function renderForm(){
           layui.use('form', function(){
           var form = layui.form;//高版本建议把括号去掉，有的低版本，需要加()
@@ -135,29 +130,7 @@
              });
          }
     	 //获取城市下拉框
-    	 function getCity(){
-    		 $.ajax({
-                 url:"<%=basePath%>city/findAll",
-                 type:'post',//method请求方式，get或者post
-                 dataType:'json',//预期服务器返回的数据类型
-                 contentType: "application/json; charset=utf-8",
-                 success:function(res){//res为相应体,function为回调函数
-                	
-                     let options = "<option value=''></option>"
-                     res.forEach(item=>{
-                    	 options+="<option value='" + item.id + "'>" + item.city + "</option>";
-                     })
-                    
-                     $("#cid").html(options)
-                     
-                   
-                     renderForm()
-                 },
-                 error:function(){
-                  
-                 }
-             });
-    	 }
+    
          //查询
          $(document).on('click','#search',function(){
         	 getdata()
@@ -165,9 +138,9 @@
          });
         function getdata(){
         	 let type = $("#datatype").val()
-        	 let cid = $("#cid").val()
+        	
         	 $.ajax({
-                 url:"<%=basePath%>data/realtime?cid="+cid+"&type="+type,
+                 url:"<%=basePath%>data/realtime?type="+type,
                  type:'post',//method请求方式，get或者post
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
@@ -175,9 +148,9 @@
                 	
                 	option.xAxis.data = res.data;
                  	option.series = res.series;
-                 	 console.log(option)
+                 
                  	myChart.setOption(option)
-                    console.log(res)
+                  
                  },
                  error:function(){
                   

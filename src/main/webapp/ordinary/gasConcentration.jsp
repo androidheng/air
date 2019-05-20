@@ -21,7 +21,7 @@
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                   <a>首页</a>
-                  <a>历史数据</a>
+                  <a>气体浓度</a>
                 </span>
                 
             </div>
@@ -31,7 +31,7 @@
                 <div class="layui-card-body">
                      <div class="demoTable">
                                                                
-                                                                   日期：
+                                                                          日期：
                       <div class="layui-inline">
                          <input type="text" id="date"  class="layui-input">  
                       </div>
@@ -69,22 +69,21 @@
     	    }]
     	};
    // ;
-    layui.use('laydate', function(){
+        layui.use('laydate', function(){
     	  var laydate = layui.laydate;
     	  //执行一个laydate实例
     	  laydate.render({
     	    elem: '#date' //指定元素
     	  });
-    });
-    layui.use('table', function(){
-    	 var table = layui.table,form = layui.form,$=layui.$;
-    	 //查询
-         $(document).on('click','#search',function(){
-        	 getdata()
-         });
+        });
+        layui.use('table', function(){
+    	   var table = layui.table,form = layui.form,$=layui.$;
+    	   //查询
+           $(document).on('click','#search',function(){
+        	   getdata()
+            });
          function getdata(){
-        	 let cid = $("#cid").val()
-        	 let date = $("#date").val()
+        	let date = $("#date").val()
         	 $.ajax({
                  url:"<%=basePath%>warn/searchAir?date="+date,
                  type:'post',//method请求方式，get或者post

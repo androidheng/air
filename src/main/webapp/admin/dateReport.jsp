@@ -162,7 +162,7 @@
         	 let date = $("#date").val()
         	 let cid = $("#cid").val()
         	 $.ajax({
-                 url:" <%=basePath%>data/baobiao?date="+date+"&mid="+cid+"&type=0",
+                 url:" <%=basePath%>data/baobiao?date="+date+"&cid="+cid+"&type=0",
                  type:'post',//method请求方式，get或者post
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",

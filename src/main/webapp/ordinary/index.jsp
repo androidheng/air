@@ -47,7 +47,7 @@
                     <h1 style="font-size:16px;">空气质量监测与预警系统</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
-                    <li class="layui-nav-item">
+                   <!-- <li class="layui-nav-item">
                             <a >
                                 <i class="layui-icon">&#xe612;</i>
                                 <em>管理</em>
@@ -55,18 +55,18 @@
                             <dl class="layui-nav-child">
                                 <dd><a href="<%=basePath%>admin/person.jsp">用户管理</a></dd>
                                 <dd><a href="<%=basePath%>admin/address.jsp">站点管理</a></dd>
-                                <!-- <dd><a href="<%=basePath%>admin/warning.jsp">报警管理</a></dd> -->
+                                 <dd><a href="<%=basePath%>admin/warning.jsp">报警管理</a></dd> 
                                 <dd><a href="<%=basePath%>admin/parames.jsp">参数管理</a></dd>
                             </dl>
-                    </li>  
+                    </li>  -->
                     <li class="layui-nav-item">
                             <a >
                                 <i class="layui-icon layui-icon-release">&#xe609;</i>
                                 <em>预警</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/gasConcentration.jsp">气体浓度</a></dd>
-                                <dd><a href="<%=basePath%>admin/warningStadus.jsp">报警状态</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/gasConcentration.jsp">气体浓度</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/warningStadus.jsp">报警状态</a></dd>
                                 <!-- <dd><a href="<%=basePath%>admin/homeWork.jsp">实时变化趋势</a></dd> -->
                                
                             </dl>
@@ -77,10 +77,10 @@
                                 <em>数据</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/realTimeData.jsp">实时数据</a></dd>
-                                <dd><a href="<%=basePath%>admin/historyData.jsp">历史数据</a></dd>
-                                <dd><a href="<%=basePath%>admin/pieChart.jsp">饼状图</a></dd>
-                                <dd><a href="<%=basePath%>admin/histogram.jsp">柱状图</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/realTimeData.jsp">实时数据</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/historyData.jsp">历史数据</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/pieChart.jsp">饼状图</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/histogram.jsp">柱状图</a></dd>
                             </dl>
                     </li>  
                      <li class="layui-nav-item">
@@ -89,9 +89,9 @@
                                 <em>报表</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/dateReport.jsp">日报表</a></dd>
-                                <dd><a href="<%=basePath%>admin/monthReport.jsp">月报表</a></dd>
-                                <dd><a href="<%=basePath%>admin/yearReport.jsp">年报表</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/dateReport.jsp">日报表</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/monthReport.jsp">月报表</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/yearReport.jsp">年报表</a></dd>
                             </dl>
                     </li>
                      <li class="layui-nav-item">
@@ -100,8 +100,8 @@
                                 <em>监控</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/homeWork.jsp">数据监控</a></dd>
-                                <dd><a href="<%=basePath%>admin/monitor.jsp">地图场景</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/homeWork.jsp">数据监控</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/monitor.jsp">地图场景</a></dd>
                             </dl>
                     </li>    
                  </ul>

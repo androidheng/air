@@ -97,8 +97,7 @@
       	           }
       	           ,where: {
       	             date: date.val(),
-      	           
-      	           }
+      	            }
       	         });
       	       }
       	     };

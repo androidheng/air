@@ -30,14 +30,7 @@
                 <div class="layui-card-body">
                      <div class="demoTable">
                         <div class="layui-inline">
-                                                                         城市名称                                               
-                         <div class="layui-inline">
-                          <form class="layui-form" action="">
-                             <select  id="cid" lay-verify="required"></select>
-                          </form>
-                         
-                         </div>
-                                                                            时间
+                                                                                        时间
                          <div class="layui-inline" >
                             <input type="text" id="date" class="layui-input">  
                          </div>
@@ -61,8 +54,7 @@
    
     layui.use('table', function(){
     	 var table = layui.table,form = layui.form,$=layui.$;
-    	 //重新渲染表单
-    	 getDataType()
+    	
     	
          function renderForm(){
           layui.use('form', function(){
@@ -103,7 +95,7 @@
         });
          var  active = {
       	       reload: function(){
-      	        var cid = $('#cid');
+      	       
       	        var date = $('#date');
       	        //执行重载
       	         table.reload('testReload', {
@@ -113,7 +105,7 @@
       	           ,where: {
       	             type: 0,
       	             date: date.val(),
-      	             cid:cid.val()
+      	             
       	           }
       	         });
       	       }
@@ -125,34 +117,11 @@
       	});
     	 
          $(document).on('click','#importExcel',function(){
-        	 let cid = $("#cid").val()
         	 let date = $("#date").val()
-             if(!cid) return alert('请先选择城市');
-        	 if(!date) return alert('请先选日期');
-        	 location.href="<%=basePath%>data/exportbaobiao?cid="+cid+"&date="+date+"&type=0";
+             if(!date) return alert('请先选日期');
+        	 location.href="<%=basePath%>data/exportbaobiao?date="+date+"&type=0";
          });
-    	 //获取数据下拉框
-         function getDataType(){
-        	 $.ajax({
-                 url:"<%=basePath%>city/findAll",
-                 type:'post',//method请求方式，get或者post
-                 dataType:'json',//预期服务器返回的数据类型
-                 contentType: "application/json; charset=utf-8",
-                 success:function(res){//res为相应体,function为回调函数
-                	
-                     let options = "<option value=''></option>"
-                     res.forEach(item=>{
-                    	 options+="<option value='" + item.id + "'>" + item.city + "</option>";
-                     })
-                    
-                     $("#cid").html(options)
-                     renderForm()
-                 },
-                 error:function(){
-                  
-                 }
-             });
-         }
+    	
     	
          //查询
          $(document).on('click','#search',function(){
@@ -160,9 +129,8 @@
          });
         function getdata(){
         	 let date = $("#date").val()
-        	 let cid = $("#cid").val()
         	 $.ajax({
-                 url:" <%=basePath%>data/baobiao?date="+date+"&mid="+cid+"&type=0",
+                 url:" <%=basePath%>data/baobiao?date="+date+"&type=0",
                  type:'post',//method请求方式，get或者post
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
