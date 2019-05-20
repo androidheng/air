@@ -49,6 +49,17 @@
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
                             <a >
+                                <i class="layui-icon layui-icon-water">&#xe636;</i>
+                                <em>监控</em>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="<%=basePath%>admin/monitor.jsp">地图场景</a></dd>
+                                <dd><a href="<%=basePath%>admin/homeWork.jsp">数据监控</a></dd>
+                                
+                            </dl>
+                    </li>    
+                    <li class="layui-nav-item">
+                            <a >
                                 <i class="layui-icon">&#xe612;</i>
                                 <em>管理</em>
                             </a>
@@ -94,16 +105,7 @@
                                 <dd><a href="<%=basePath%>admin/yearReport.jsp">年报表</a></dd>
                             </dl>
                     </li>
-                     <li class="layui-nav-item">
-                            <a >
-                                <i class="layui-icon layui-icon-water">&#xe636;</i>
-                                <em>监控</em>
-                            </a>
-                            <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>admin/homeWork.jsp">数据监控</a></dd>
-                                <dd><a href="<%=basePath%>admin/monitor.jsp">地图场景</a></dd>
-                            </dl>
-                    </li>    
+                
                  </ul>
            </div>
         </div>

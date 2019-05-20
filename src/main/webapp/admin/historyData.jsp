@@ -88,7 +88,8 @@
     	  
     	  //执行一个laydate实例
     	  laydate.render({
-    	    elem: '#date' //指定元素
+    	    elem: '#date', //指定元素
+    	   
     	  });
     });
     layui.use('table', function(){

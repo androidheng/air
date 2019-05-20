@@ -67,6 +67,7 @@
 	          //执行一个laydate实例
 	     	  laydate.render({
 	     	    elem: '#date', //指定元素
+	     	   value: new Date()
 	     	  });
          });
     	//展示已知数据

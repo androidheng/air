@@ -59,6 +59,17 @@
                                 <dd><a href="<%=basePath%>admin/parames.jsp">参数管理</a></dd>
                             </dl>
                     </li>  -->
+                     <li class="layui-nav-item">
+                            <a >
+                                <i class="layui-icon layui-icon-water">&#xe636;</i>
+                                <em>监控</em>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="<%=basePath%>ordinary/monitor.jsp">地图场景</a></dd>
+                                <dd><a href="<%=basePath%>ordinary/homeWork.jsp">数据监控</a></dd>
+                               
+                            </dl>
+                    </li>    
                     <li class="layui-nav-item">
                             <a >
                                 <i class="layui-icon layui-icon-release">&#xe609;</i>
@@ -94,16 +105,7 @@
                                 <dd><a href="<%=basePath%>ordinary/yearReport.jsp">年报表</a></dd>
                             </dl>
                     </li>
-                     <li class="layui-nav-item">
-                            <a >
-                                <i class="layui-icon layui-icon-water">&#xe636;</i>
-                                <em>监控</em>
-                            </a>
-                            <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>ordinary/homeWork.jsp">数据监控</a></dd>
-                                <dd><a href="<%=basePath%>ordinary/monitor.jsp">地图场景</a></dd>
-                            </dl>
-                    </li>    
+                    
                  </ul>
            </div>
         </div>

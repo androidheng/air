@@ -75,7 +75,8 @@
 	          //执行一个laydate实例
 	     	  laydate.render({
 	     	    elem: '#date', //指定元素
-	     	    type:'year'
+	     	    type:'year',
+	     	   value: new Date()
 	     	  });
          });
     	//展示已知数据
