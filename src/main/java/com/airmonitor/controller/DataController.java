@@ -96,6 +96,202 @@ public class DataController {
 	}
 	
 	/**
+	 * 实时数据仪表盘
+	 * @param session
+	 * @param cid
+	 * @return
+	 */
+	@RequestMapping(value="/dashboard",produces = "application/json;charset=UTF-8")
+	public Object dashboard(HttpSession session,String cid){
+//		String dates=DateUtils.getCurrentDay();
+		String dates="2019-05-21";
+		TbUser user=(TbUser) session.getAttribute("user");
+		user=new TbUser();
+		user.setType(1);
+		String searchId;
+		if(user!=null){ 
+			if(user.getType()==0) {
+				searchId=user.getCid()+"";
+			}else {
+				searchId=cid;
+			}	
+			
+			List<TbData> datas=dataService.findRealData(Integer.parseInt(searchId),dates);
+			Map<String, Object> resultMap=new HashMap<String, Object>();
+			List<Map<String, Object>> resultList=new ArrayList<Map<String,Object>>();
+			List<String> xAxisData=new ArrayList<String>();
+			List<String> legendData=new ArrayList<String>();
+			Map<String, Object> mp1=new HashMap<String, Object>();
+			mp1.put("name", "PM2.5");
+			mp1.put("type", "gauge");
+			//mp1.put("stack", "总量");
+			List<Integer> pm2List=new ArrayList<Integer>();
+			Map<String, Object> mp2=new HashMap<String, Object>();
+			mp2.put("name", "PM10");
+			mp2.put("type", "gauge");
+			//mp2.put("stack", "总量");
+			List<Integer> pm10List=new ArrayList<Integer>();
+			Map<String, Object> mp3=new HashMap<String, Object>();
+			mp3.put("name", "SO2");
+			mp3.put("type", "gauge");
+			//mp3.put("stack", "总量");
+			List<Integer> so2List=new ArrayList<Integer>();
+			Map<String, Object> mp4=new HashMap<String, Object>();
+			mp4.put("name", "CO");
+			mp4.put("type", "gauge");
+			//mp4.put("stack", "总量");
+			List<Double> coList=new ArrayList<Double>();
+			Map<String, Object> mp5=new HashMap<String, Object>();
+			mp5.put("name", "NO2");
+			mp5.put("type", "gauge");
+			//mp5.put("stack", "总量");
+			List<Integer> no2List=new ArrayList<Integer>();
+			
+			Map<String, Object> mp6=new HashMap<String, Object>();
+			mp6.put("name", "O3");
+			mp6.put("type", "gauge");
+			//mp6.put("stack", "总量");
+			List<Integer> o3List=new ArrayList<Integer>();
+			for(TbData d:datas){
+				xAxisData.add(d.getCreatetime());
+				pm2List.add(Integer.parseInt(d.getPm2()));
+				pm10List.add(Integer.parseInt(d.getPm10()));
+				so2List.add(Integer.parseInt(d.getSo2()));
+				coList.add(Double.parseDouble(d.getCo()));
+				no2List.add(Integer.parseInt(d.getNo2()));
+				o3List.add(Integer.parseInt(d.getO3()));
+			}
+			mp1.put("data", pm2List);
+			mp2.put("data", pm10List);
+			mp3.put("data", so2List);
+			mp4.put("data", coList);
+			mp5.put("data", no2List);
+			mp6.put("data", o3List);
+				resultList.add(mp1);
+				resultList.add(mp2);
+				resultList.add(mp3);
+				resultList.add(mp4);
+				resultList.add(mp5);
+				resultList.add(mp6);
+			
+			
+			
+			
+			
+			
+//			resultMap.put("data", xAxisData);
+			resultMap.put("series", resultList);
+			return resultMap;		
+		}
+		return new Result(false, "请先登录");
+	}
+	@RequestMapping(value="/radar",produces = "application/json;charset=UTF-8")
+	public Object radar(HttpSession session,String cid){
+//		String dates=DateUtils.getCurrentDay();
+		String dates="2019-05-21";
+		TbUser user=(TbUser) session.getAttribute("user");
+		user=new TbUser();
+		user.setType(1);
+		String searchId;
+		if(user!=null){ 
+			if(user.getType()==0) {
+				searchId=user.getCid()+"";
+			}else {
+				searchId=cid;
+			}	
+			
+			List<TbData> datas=dataService.findRealData(Integer.parseInt(searchId),dates);
+			Map<String, Object> resultMap=new HashMap<String, Object>();
+			List<Map<String, Object>> resultList=new ArrayList<Map<String,Object>>();
+			List<Map<String, Object>> polarList=new ArrayList<Map<String,Object>>();
+			List<Map<String, Object>> indicatorList=new ArrayList<Map<String,Object>>();
+			List<Map<String, Object>> inChildList=new ArrayList<Map<String,Object>>();
+			
+			Map<String, Object>legendList=new HashMap<>();
+			legendList.put("x", "center");
+			List<String> xAxisData=new ArrayList<String>();
+			List<String> legendData=new ArrayList<String>();
+			Map<String, Object> dataMap=new HashMap<String, Object>();
+			Map<String, Object> mp1=new HashMap<String, Object>();
+			mp1.put("text", "PM2.5");
+			mp1.put("max", "300");
+			legendData.add("PM2.5");
+			inChildList.add(mp1);
+			//mp1.put("stack", "总量");
+			List<Object> pm2List=new ArrayList<Object>();
+			Map<String, Object> mp2=new HashMap<String, Object>();
+			mp2.put("text", "PM10");
+			mp2.put("max", "300");
+			legendData.add("PM10");
+			inChildList.add(mp2);
+			//mp2.put("stack", "总量");
+			List<Integer> pm10List=new ArrayList<Integer>();
+			Map<String, Object> mp3=new HashMap<String, Object>();
+			mp3.put("text", "SO2");
+			mp3.put("max", "100");
+			legendData.add("SO2");
+			inChildList.add(mp3);
+			//mp3.put("stack", "总量");
+			List<Integer> so2List=new ArrayList<Integer>();
+			Map<String, Object> mp4=new HashMap<String, Object>();
+			mp4.put("text", "CO");
+			mp4.put("max", "5");
+			legendData.add("CO");
+			inChildList.add(mp4);
+			//mp4.put("stack", "总量");
+			List<Double> coList=new ArrayList<Double>();
+			Map<String, Object> mp5=new HashMap<String, Object>();
+			mp5.put("text", "NO2");
+			mp5.put("max", "100");
+			legendData.add("NO2");
+			inChildList.add(mp5);
+			//mp5.put("stack", "总量");
+			List<Integer> no2List=new ArrayList<Integer>();
+			
+			Map<String, Object> mp6=new HashMap<String, Object>();
+			mp6.put("text", "O3");
+			mp6.put("max", "100");
+			legendData.add("O3");
+			legendList.put("data", legendData);
+			inChildList.add(mp6);
+			Map<String, Object> map=new HashMap<>();
+			map.put("indicator", inChildList);
+			map.put("radius", 130);
+			indicatorList.add(map);
+			//mp6.put("stack", "总量");
+			List<Integer> o3List=new ArrayList<Integer>();
+			TbData d=datas.get(0);
+			xAxisData.add(d.getCreatetime());
+			pm2List.add(Integer.parseInt(d.getPm2()));
+			pm2List.add(Integer.parseInt(d.getPm10()));
+			pm2List.add(Integer.parseInt(d.getSo2()));
+			pm2List.add(Double.parseDouble(d.getCo()));
+			pm2List.add(Integer.parseInt(d.getNo2()));
+			pm2List.add(Integer.parseInt(d.getO3()));
+			dataMap.put("data", pm2List);
+			dataMap.put("name", "空气质量");
+			resultList.add(dataMap);
+		/*	mp2.put("data", pm10List);
+			mp3.put("data", so2List);
+			mp4.put("data", coList);
+			mp5.put("data", no2List);
+			mp6.put("data", o3List);
+			resultList.add(mp1);
+			resultList.add(mp2);
+			resultList.add(mp3);
+			resultList.add(mp4);
+			resultList.add(mp5);
+			resultList.add(mp6);*/
+			
+			resultMap.put("legend", legendList);
+			resultMap.put("polar", indicatorList);
+//			resultMap.put("polar", polarList);
+			resultMap.put("data", resultList);
+			return resultMap;		
+		}
+		return new Result(false, "请先登录");
+	}
+	/**
 	 * 实时数据折线图
 	 * @param session
 	 * @param cid
