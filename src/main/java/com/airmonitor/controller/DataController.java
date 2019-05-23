@@ -167,7 +167,7 @@ public class DataController {
 				mpp3.put("value", Integer.parseInt(d.getSo2()));
 				mpp3.put("name", "SO2");
 				so2List.add(mpp3);
-				
+				 
 				Map<String, Object> mpp4=new HashMap<>();
 				mpp4.put("value", Double.parseDouble(d.getCo()));
 				mpp4.put("name", "CO");
