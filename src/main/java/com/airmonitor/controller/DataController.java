@@ -152,7 +152,7 @@ public class DataController {
 			mp6.put("type", "gauge");
 			//mp6.put("stack", "总量");
 			List<Integer> o3List=new ArrayList<Integer>();
-			for(TbData d:datas){
+			TbData d=datas.get(0);
 				xAxisData.add(d.getCreatetime());
 				pm2List.add(Integer.parseInt(d.getPm2()));
 				pm10List.add(Integer.parseInt(d.getPm10()));
@@ -160,7 +160,6 @@ public class DataController {
 				coList.add(Double.parseDouble(d.getCo()));
 				no2List.add(Integer.parseInt(d.getNo2()));
 				o3List.add(Integer.parseInt(d.getO3()));
-			}
 			mp1.put("data", pm2List);
 			mp2.put("data", pm10List);
 			mp3.put("data", so2List);
@@ -215,35 +214,35 @@ public class DataController {
 			Map<String, Object> mp1=new HashMap<String, Object>();
 			mp1.put("text", "PM2.5");
 			mp1.put("max", "250");
-			legendData.add("PM2.5");
+//			legendData.add("PM2.5");
 			inChildList.add(mp1);
 			//mp1.put("stack", "总量");
 			List<Object> pm2List=new ArrayList<Object>();
 			Map<String, Object> mp2=new HashMap<String, Object>();
 			mp2.put("text", "PM10");
 			mp2.put("max", "250");
-			legendData.add("PM10");
+//			legendData.add("PM10");
 			inChildList.add(mp2);
 			//mp2.put("stack", "总量");
 			List<Integer> pm10List=new ArrayList<Integer>();
 			Map<String, Object> mp3=new HashMap<String, Object>();
 			mp3.put("text", "SO2");
 			mp3.put("max", "250");
-			legendData.add("SO2");
+//			legendData.add("SO2");
 			inChildList.add(mp3);
 			//mp3.put("stack", "总量");
 			List<Integer> so2List=new ArrayList<Integer>();
 			Map<String, Object> mp4=new HashMap<String, Object>();
 			mp4.put("text", "CO");
 			mp4.put("max", "250");
-			legendData.add("CO");
+//			legendData.add("CO");
 			inChildList.add(mp4);
 			//mp4.put("stack", "总量");
 			List<Double> coList=new ArrayList<Double>();
 			Map<String, Object> mp5=new HashMap<String, Object>();
 			mp5.put("text", "NO2");
 			mp5.put("max", "250");
-			legendData.add("NO2");
+//			legendData.add("NO2");
 			inChildList.add(mp5);
 			//mp5.put("stack", "总量");
 			List<Integer> no2List=new ArrayList<Integer>();
@@ -251,7 +250,7 @@ public class DataController {
 			Map<String, Object> mp6=new HashMap<String, Object>();
 			mp6.put("text", "O3");
 			mp6.put("max", "250");
-			legendData.add("O3");
+			legendData.add("实时空气质量");
 			legendList.put("data", legendData);
 			inChildList.add(mp6);
 			Map<String, Object> map=new HashMap<>();
@@ -269,7 +268,7 @@ public class DataController {
 			pm2List.add(Integer.parseInt(d.getNo2()));
 			pm2List.add(Integer.parseInt(d.getO3()));
 			dataMap.put("data", pm2List);
-			dataMap.put("name", "空气质量");
+			dataMap.put("name", "实时空气质量");
 			resultList.add(dataMap);
 		/*	mp2.put("data", pm10List);
 			mp3.put("data", so2List);
