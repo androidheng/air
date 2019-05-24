@@ -40,10 +40,20 @@
                          <input type="text" id="date"  class="layui-input">  
                       </div>
                         <div class="layui-inline">
-                                                                          数据类型                                                
+                                                                                数据类型                                                
                          <div class="layui-inline">
                           <form class="layui-form" action="">
                              <select  id="datatype" lay-verify="required"></select>
+                          </form>
+                         
+                         </div>
+                                                                                           呈现形式
+                           <div class="layui-inline">
+                           <form class="layui-form" action="">
+                             <select  id="showType" lay-verify="required">
+                                <option value="0">折线图</option>
+                                <option value="1">柱状图</option>
+                             </select>
                           </form>
                          
                         </div>
@@ -52,7 +62,8 @@
                       <button class="layui-btn" id="importExcel">导出Excel</button>
                     </div>
                     
-                     <div id="main" style="width: 100%;height:600px;"></div>
+                     <div id="lineChart" style="width: 100%;height:600px;"></div>
+                     <div id="zhuChart" style="width: 100%;height:600px;"></div>
                     
                     <table id="demo" lay-filter="demo" ></table>
                 </div>
@@ -65,9 +76,10 @@
   
    
     <script>
-    var myChart = echarts.init(document.getElementById('main'));   
+    var lineChart = echarts.init(document.getElementById('lineChart'));   
+    var zhuChart = echarts.init(document.getElementById('zhuChart'));   
 
-    var option = {
+    var lineOption = {
     	    xAxis: {
     	        type: 'category',
     	        boundaryGap: false,
@@ -80,6 +92,19 @@
     	        data: [],
     	        type: 'line',
     	        areaStyle: {}
+    	    }]
+    	};
+    var zhuOption = {
+    	    xAxis: {
+    	        type: 'category',
+    	        data: []
+    	    },
+    	    yAxis: {
+    	        type: 'value'
+    	    },
+    	    series: [{
+    	        data: [],
+    	        type: 'bar'
     	    }]
     	};
    // ;
@@ -169,17 +194,29 @@
         	 let type = $("#datatype").val()
         	 let cid = $("#cid").val()
         	 let dates = $("#date").val()
+        	 let showType = $("#showType").val()
+        	 let method = showType==0?'searchHistory':'findZhuData'
         	 $.ajax({
-                 url:"<%=basePath%>data/searchHistory?cid="+cid+"&dates="+dates+"&type="+type,
+                 url:"<%=basePath%>data/"+method+"?cid="+cid+"&dates="+dates+"&type="+type,
                  type:'post',//method请求方式，get或者post
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
                  success:function(res){//res为相应体,function为回调函数
+                	 if(showType==0){
+                		 lineOption.xAxis.data = res.data;
+                    	 lineOption.series = res.series;
+                     	 console.log(lineOption)
+                     	 lineChart.setOption(lineOption)
+                     	 $("#lineChart").show()
+                     	 $("#zhuChart").hide()
+                	 }else{
+                		 zhuOption.xAxis.data = res.xdata;
+                		 zhuOption.series[0].data = res.data;
+                		 zhuChart.setOption(zhuOption)
+                     	 $("#lineChart").hide()
+                     	 $("#zhuChart").show()
+                	 }
                 	
-                	option.xAxis.data = res.data;
-                 	option.series = res.series;
-                 	 console.log(option)
-                 	myChart.setOption(option)
                     console.log(res)
                  },
                  error:function(){

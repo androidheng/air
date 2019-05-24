@@ -91,7 +91,7 @@
                                 <dd><a href="<%=basePath%>ordinary/realTimeData.jsp">实时数据</a></dd>
                                 <dd><a href="<%=basePath%>ordinary/historyData.jsp">历史数据</a></dd>
                                 <dd><a href="<%=basePath%>ordinary/pieChart.jsp">饼状图</a></dd>
-                                <dd><a href="<%=basePath%>ordinary/histogram.jsp">柱状图</a></dd>
+                                <!--  <dd><a href="<%=basePath%>ordinary/histogram.jsp">柱状图</a></dd>-->
                             </dl>
                     </li>  
                      <li class="layui-nav-item">

@@ -21,7 +21,7 @@
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                   <a>首页</a>
-                  <a>实时数据</a>
+                  <a>历史数据</a>
                 </span>
             </div>
         </div>
@@ -29,13 +29,14 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                      <div class="demoTable">
-                                                                
-                                                                 
                         <div class="layui-inline">
-                                                                          数据类型                                                
-                         <div class="layui-inline">
-                          <form class="layui-form" action="">
-                             <select  id="datatype" lay-verify="required"></select>
+                                                                                               呈现形式
+                           <div class="layui-inline">
+                           <form class="layui-form" action="">
+                             <select  id="showType" lay-verify="required">
+                                <option value="0">仪表盘</option>
+                                <option value="1">雷达图</option>
+                             </select>
                           </form>
                          
                         </div>
@@ -43,7 +44,8 @@
                       <button class="layui-btn" id="search">查询</button>
                     </div>
                     
-                     <div id="main" style="width: 100%;height:600px;"></div>
+                     <div id="meterChart" style="width: 100%;height:600px;"></div>
+                     <div id="radarChart" style="width: 100%;height:600px;"></div>
                     
                     <table id="demo" lay-filter="demo" ></table>
                 </div>
@@ -52,33 +54,294 @@
     </div>
    </div>
     <script src="<%=basePath%>assets/layui.all.js"></script>
-    <script src="<%=basePath%>assets/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
   
    
     <script>
-    var myChart = echarts.init(document.getElementById('main'));   
+    var meterChart = echarts.init(document.getElementById('meterChart'));   
+    var radarChart = echarts.init(document.getElementById('radarChart'));   
 
-    var option = {
-    	    xAxis: {
-    	        type: 'category',
-    	        boundaryGap: false,
-    	        data: []
+    var meterOption = {
+    	    tooltip : {
+    	        formatter: "{a} <br/>{c} {b}"
     	    },
-    	    yAxis: {
-    	        type: 'value'
-    	    },
-    	    series: [{
-    	        data: [],
-    	        type: 'line',
-    	        areaStyle: {}
-    	    }]
+    	  
+    	    series : [
+    	        {
+    	            name:'PM2.5',
+    	            type:'gauge',
+    	            center : ['25%', '30%'],    // 默认全局居中
+    	            radius : '40%',
+    	            axisLine: {            // 坐标轴线
+    	                lineStyle: {       // 属性lineStyle控制线条样式
+    	                    width: 8
+    	                }
+    	            },
+    	            axisTick: {            // 坐标轴小标记
+    	                length :12,        // 属性length控制线长
+    	                lineStyle: {       // 属性lineStyle控制线条样式
+    	                    color: 'auto'
+    	                }
+    	            },
+    	            splitLine: {           // 分隔线
+    	                length :20,         // 属性length控制线长
+    	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+    	                    color: 'auto'
+    	                }
+    	            },
+    	            pointer: {
+    	                width:5
+    	            },
+    	            title : {
+    	                offsetCenter: [0, '-30%'],       // x, y，单位px
+    	            },
+    	            detail : {
+    	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+    	                    fontWeight: 'bolder'
+    	                }
+    	            },
+    	            data:[]
+    	        },
+    	        {
+    	            name:'PM10',
+    	            type:'gauge',
+    	            center : ['50%', '30%'],    // 默认全局居中
+    	            radius : '40%',
+    	            axisLine: {            // 坐标轴线
+    	                lineStyle: {       // 属性lineStyle控制线条样式
+    	                    width: 8
+    	                }
+    	            },
+    	            axisTick: {            // 坐标轴小标记
+    	                length :12,        // 属性length控制线长
+    	                lineStyle: {       // 属性lineStyle控制线条样式
+    	                    color: 'auto'
+    	                }
+    	            },
+    	            splitLine: {           // 分隔线
+    	                length :20,         // 属性length控制线长
+    	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+    	                    color: 'auto'
+    	                }
+    	            },
+    	            pointer: {
+    	                width:5
+    	            },
+    	            title : {
+    	                offsetCenter: [0, '-30%'],       // x, y，单位px
+    	            },
+    	            detail : {
+    	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+    	                    fontWeight: 'bolder'
+    	                }
+    	            },
+    	            data:[]
+    	        },
+    	        {
+    	        	name:'SO2',
+      	            type:'gauge',
+      	            center : ['75%', '30%'],    // 默认全局居中
+      	            radius : '40%',
+      	            axisLine: {            // 坐标轴线
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    width: 8
+      	                }
+      	            },
+      	            axisTick: {            // 坐标轴小标记
+      	                length :12,        // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            splitLine: {           // 分隔线
+      	                length :20,         // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            pointer: {
+      	                width:5
+      	            },
+      	            title : {
+      	                offsetCenter: [0, '-30%'],       // x, y，单位px
+      	            },
+      	            detail : {
+      	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+      	                    fontWeight: 'bolder'
+      	                }
+      	            },
+      	            data:[]
+    	          
+    	        },
+    	        {
+    	        	name:'CO',
+      	            type:'gauge',
+      	            center : ['25%', '70%'],    // 默认全局居中
+      	            radius : '40%',
+      	            axisLine: {            // 坐标轴线
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    width: 8
+      	                }
+      	            },
+      	            axisTick: {            // 坐标轴小标记
+      	                length :12,        // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            splitLine: {           // 分隔线
+      	                length :20,         // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            pointer: {
+      	                width:5
+      	            },
+      	            title : {
+      	                offsetCenter: [0, '-30%'],       // x, y，单位px
+      	            },
+      	            detail : {
+      	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+      	                    fontWeight: 'bolder'
+      	                }
+      	            },
+      	            data:[]
+    	          
+    	        },
+    	        {
+    	        	name:'NO2',
+      	            type:'gauge',
+      	            center : ['50%', '70%'],    // 默认全局居中
+      	            radius : '40%',
+      	            axisLine: {            // 坐标轴线
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    width: 8
+      	                }
+      	            },
+      	            axisTick: {            // 坐标轴小标记
+      	                length :12,        // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            splitLine: {           // 分隔线
+      	                length :20,         // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            pointer: {
+      	                width:5
+      	            },
+      	            title : {
+      	                offsetCenter: [0, '-30%'],       // x, y，单位px
+      	            },
+      	            detail : {
+      	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+      	                    fontWeight: 'bolder'
+      	                }
+      	            },
+      	            data:[{value: 1.5, name: 'NO2 m3/mg'}]
+    	          
+    	        },
+    	        {
+    	        	name:'O3',
+      	            type:'gauge',
+      	            center : ['75%', '70%'],    // 默认全局居中
+      	            radius : '40%',
+      	            axisLine: {            // 坐标轴线
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    width: 8
+      	                }
+      	            },
+      	            axisTick: {            // 坐标轴小标记
+      	                length :12,        // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            splitLine: {           // 分隔线
+      	                length :20,         // 属性length控制线长
+      	                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+      	                    color: 'auto'
+      	                }
+      	            },
+      	            pointer: {
+      	                width:5
+      	            },
+      	            title : {
+      	                offsetCenter: [0, '-30%'],       // x, y，单位px
+      	            },
+      	            detail : {
+      	                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+      	                    fontWeight: 'bolder'
+      	                }
+      	            },
+      	            data:[]
+    	          
+    	        },
+    	       
+    	    ]
+    	 
     	};
+    let  radarOption = {
+    	   
+    	    tooltip : {
+    	        trigger: 'axis'
+    	    },
+    	    legend: {
+    	        orient : 'vertical',
+    	        x : 'center',
+    	        y : 'top',
+    	        data:['实时空气质量']
+    	    },
+    	   
+    	    polar : [
+    	       {
+    	           indicator : [
+    	        	   {max: "250", text: "PM2.5"},
+    	        	   {max: "250", text: "PM10"},
+    	        	   {max: "250", text: "SO2"},
+    	        	   {max: "250", text: "CO"},
+    	        	   {max: "250", text: "NO2"},
+    	        	   {max: "250", text: "O3"}
+    	            ]
+    	        }
+    	    ],
+    	    calculable : true,
+    	    series : [
+    	        {
+    	            name: '实时空气质量',
+    	            type: 'radar',
+    	            data : [
+    	                {
+    	                    value : [43,101, 25, 0.6,121, 106],
+    	                    name : '实时空气质量',
+    	                    //在拐点处显示数值
+    	                    label: {
+    	                        normal: {
+    	                            show: true,
+    	                            formatter: (params) => {
+    	                                return params.value
+    	                            },
+    	                        },
+    	                    },
+    	
+    	                },
+    	               
+    	            ]
+    	        }
+    	    ]
+    	};
+  
+    
    // ;
    
     layui.use('table', function(){
     	 var table = layui.table,form = layui.form,$=layui.$;
     	 //重新渲染表单
-    	 getDataType()
+    	
     	
          function renderForm(){
           layui.use('form', function(){
@@ -86,71 +349,44 @@
           form.render();
           });
          }
-    	 function tableRender(){
-    		//展示已知数据
-    		  let type = $("#datatype").val()
-        	  let cid = $("#cid").val()
-    	       table.render({
-    	           elem: '#demo'
-    	          ,url:"<%=basePath%>data/realtimesearch?cid="+cid+"&type="+type
-    	          ,cols: [[ //标题栏
-    	             {field: 'name', title: '数据名称'}
-    	            ,{field: 'nums', title: '实时数值'}
-    	            ,{field: 'createtime', title:'时间'}
-    	         ]]
-    	        ,skin: 'line' //表格风格
-    	        ,even: true
-    	        ,page: true //是否显示分页
-    	        ,limits: [5, 7, 10,15]
-    	        ,limit: 15 //每页默认显示的数量
-    	       });
-    	 }
-    	 //获取数据下拉框
-         function getDataType(){
-        	 $.ajax({
-                 url:"<%=basePath%>base/findAll",
-                 type:'post',//method请求方式，get或者post
-                 dataType:'json',//预期服务器返回的数据类型
-                 contentType: "application/json; charset=utf-8",
-                 success:function(res){//res为相应体,function为回调函数
-                	
-                     let options = "<option value=''></option>"
-                     res.forEach(item=>{
-                    	 options+="<option value='" + item.id + "'>" + item.typename + "</option>";
-                     })
-                    
-                     $("#datatype").html(options)
-                     
-                   
-                     renderForm()
-                 },
-                 error:function(){
-                  
-                 }
-             });
-         }
-    	 //获取城市下拉框
+    	
     
+    	
          //查询
          $(document).on('click','#search',function(){
         	 getdata()
-        	 tableRender()
+        	
          });
         function getdata(){
-        	 let type = $("#datatype").val()
-        	
+        	 let showType = $("#showType").val()
+        	 let method = showType==0?'dashboard':'radar'
         	 $.ajax({
-                 url:"<%=basePath%>data/realtime?type="+type,
+                 url:"<%=basePath%>data/"+method,
                  type:'post',//method请求方式，get或者post
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
                  success:function(res){//res为相应体,function为回调函数
+                	 if(showType==1){
+                		 radarOption.legend.data = res.legend.data
+                		 radarOption.polar = res.polar
+                		 radarOption.series[0].data.value = res.data
+                		 radarChart.setOption(radarOption)
+                		 $("#radarChart").show()
+                		 $("#meterChart").hide()
+                	 }else{
+                		 meterOption.series[0].data = res.series[0].data;
+                    	 meterOption.series[1].data = res.series[1].data;
+                    	 meterOption.series[2].data = res.series[2].data;
+                    	 meterOption.series[3].data = res.series[3].data;
+                    	 meterOption.series[4].data = res.series[4].data;
+                    	 meterOption.series[5].data = res.series[5].data;
+                    	 meterChart.setOption(meterOption)
+                    	 $("#radarChart").hide()
+                		 $("#meterChart").show()
+                	 }
+                	 console.log(res)
+                	//option.xAxis.data = res.data;
                 	
-                	option.xAxis.data = res.data;
-                 	option.series = res.series;
-                 
-                 	myChart.setOption(option)
-                  
                  },
                  error:function(){
                   

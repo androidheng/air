@@ -12,6 +12,15 @@
 	<meta name="format-detection" content="telephone=no">	
     <link rel="stylesheet" href="<%=basePath%>assets/css/layui.css">
     <link rel="stylesheet" href="<%=basePath%>assets/css/view.css"/>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=DDLwA2CBFGHRpxFzFx3K5KnBQtHP4hte"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
   
     <link rel="icon" href="/favicon.ico">
     <title>管理后台</title>
@@ -117,108 +126,83 @@
          </div>
      </div>
  <div class="wrapper">
-	<div id="container"></div>
+	<div id="container" style="width: 100%;height:100%;"></div>
 	
   </div>
   
 
 
-<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.14&key=4f4388a14723c2fc91b750e5f9b0ce33&plugin=AMap.Geocoder"></script>
+
+
+
+ 
+
+ 
+ 
+
 <script src="<%=basePath%>assets/layui.all.js"></script>
+
 <script type="text/javascript">
+var myChart = echarts.init(document.getElementById('container'));   
+let hotData = [
+    [120.865048,32.015055,273,'南通'],
+    [119.942196,31.767865,100,'常州'],
+    [118.798244,32.067442,80,'南京'],
+    [119.418972,32.3811142,180,'扬州'],
+    [120.297878,31.558637,110,'无锡'],
+    [119.449184,32.201174,90,'镇江'],
+    [108.987453,34.292389,200,'西安'],
+]
 
- let layer = null
- let $ = null
- let city = ''
- layui.use('layer', function(){ layer = layui.layer,$ = layui.$ });
-    var map = new AMap.Map("container", {
-          resizeEnable: true,
-          center: [118.802364,32.059293],
-          size:11
-    });
-    
-    getMarkers()
-
-    //发送请求获取站点 并且 标注到地图上
-    function getMarkers(){
-        $.ajax({
-	        url : "<%=basePath%>/city/myCity",
-	        dataType : "json",
-	        success : function(res) {
-	        	console.log(res)
-            	let requestData = res.data
-            	
-             //jfong 为后台返回数据
-	             var marker;		
-	          	 for(var i=0 ; i< requestData.length;i++){
-		            	var jfong=[ +requestData[i].lat,+requestData[i].lon];	
-			          	marker = new AMap.Marker({
-			              position: jfong,
-			              zIndex: 101,
-			              map:map,
-                          icon: 'http://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
-                          draggable: false,
-                          cursor: 'move'
-			             });	
-		                 marker.setMap(map);	
-		            	 marker.city = requestData[i].city; //赋值站点名称
-		                 marker.on('click', function(e){
-		                	city = e.target.city
-                            openDilog()
-		            	 });
-	           	 }	// for-end
-             }
-		
-        }) //	Ajax结束
-
-      }
-    function getAirData(){
-    	//获取空气质量接口 暂时报错 
-        $.ajax({
-	        url : "<%=basePath%>data/cityMonitor?city="+city,
-	        dataType : "json",
-            success : function(res) {
-            	let requestData = res
-            	$('.PM25').html(requestData.pm25)
-            	$('.PM10').html(requestData.pm10)
-            	$('.CO').html(requestData.co)
-            	$('.NO2').html(requestData.no2)
-            	$('.O3').html(requestData.o3)
-            	$('.SO2').html(requestData.so2	)
-           },
-          	
-		
-        })//	Ajax结束
-    }
-
-    function openDilog(){
-       let timer = 0
-       layer.open({
-         type: 1
-        ,title: false //不显示标题栏
-        ,closeBtn: true
-        ,area: '800px'
-        ,shade: 0.8
-        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-        ,btn: ['确定']
-        ,btnAlign: 'c'
-        ,moveType: 1 //拖拽模式，0或者1
-        ,content: $("#box")
-        ,yes: function(layero){
-           layer.close(layero);
-           clearInterval(timer)
-        },
-        success:function(){
-        	timer = setInterval(getAirData,10000)  //1000 获取空气数据的 周期 1000表示1秒
-        }
-        ,end:function(layero){
-            layer.close(layero) 
-            $("#box").hide()
-           clearInterval(timer)
-        }
-      });
-    
-    }
+	option = {
+	   /* title: {
+	        text: '全国主要城市空气质量',
+	        subtext: 'data from PM25.in',
+	        sublink: 'http://www.pm25.in',
+	        left: 'center',
+	        textStyle: {
+	            color: '#fff'
+	        }
+	    },*/
+	    backgroundColor: '#404a59',
+	    visualMap: {
+	        min: 0,
+	        max: 300,
+	        splitNumber: 5,
+	        inRange: {
+	            color: ['#d94e5d','#eac736','#50a3ba'].reverse()
+	        },
+	        textStyle: {
+	            color: '#fff'
+	        }
+	    },
+	    geo: {
+	        map: 'china',
+	        zoom:1, 
+	        roam: false,
+	        label: {
+	            normal: {
+	              show: true,
+	              textStyle: {
+	              //  color: "#F0F8FB"
+	              }
+	            },
+	           
+	          },
+	         
+	    },
+	    series: [{
+	        name: 'AQI',
+	        type: 'heatmap',
+	        coordinateSystem: 'geo',
+	        data:hotData
+	    }]
+	};
+                    
+                    
+myChart.setOption(option)
+var bmap = myChart.getModel().getComponent('bmap').getBMap();
+bmap.addControl(new BMap.MapTypeControl());
 	
 
 
