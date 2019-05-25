@@ -103,11 +103,9 @@ public class DataController {
 	 */
 	@RequestMapping(value="/dashboard",produces = "application/json;charset=UTF-8")
 	public Object dashboard(HttpSession session,String cid){
-//		String dates=DateUtils.getCurrentDay();
-		String dates="2019-05-21";
+		String dates=DateUtils.getCurrentDay();
+//		String dates="2019-05-21";
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
 		String searchId;
 		if(user!=null){ 
 			if(user.getType()==0) {
@@ -208,11 +206,11 @@ public class DataController {
 	}
 	@RequestMapping(value="/radar",produces = "application/json;charset=UTF-8")
 	public Object radar(HttpSession session,String cid){
-//		String dates=DateUtils.getCurrentDay();
-		String dates="2019-05-21";
+		String dates=DateUtils.getCurrentDay();
+//		String dates="2019-05-21";
 		TbUser user=(TbUser) session.getAttribute("user");
-		user=new TbUser();
-		user.setType(1);
+//		user=new TbUser();
+//		user.setType(1);
 		String searchId;
 		if(user!=null){ 
 			if(user.getType()==0) {
