@@ -118,7 +118,7 @@
             success:function(res){//res为相应体,function为回调函数
               if(res.success){
                 layer.alert(res.message,{icon:1});
-                location.href="<%=basePath%>admin/index.jsp";
+                location.href="<%=basePath%>ordinary/index.jsp";
               //$("#res").click();//调用重置按钮将表单数据清空
             }else{
               layer.alert(res.message,{icon: 5});

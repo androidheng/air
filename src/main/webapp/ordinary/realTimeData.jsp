@@ -54,7 +54,7 @@
     </div>
    </div>
     <script src="<%=basePath%>assets/layui.all.js"></script>
-    <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
   
    
     <script>
@@ -286,54 +286,61 @@
     	 
     	};
     let  radarOption = {
+    		tooltip : {
+		         trigger: 'axis',
+		        
+		    },
+		    legend: {
+		        x : 'center',
+		        data:[]
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : {show: true},
+		            dataView : {show: true, readOnly: false},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    polar : [
+		        {
+		            indicator : [
+		            	   {max: "250", text: "PM2.5"},
+	    	        	   {max: "250", text: "PM10"},
+	    	        	   {max: "250", text: "SO2"},
+	    	        	   {max: "250", text: "CO"},
+	    	        	   {max: "250", text: "NO2"},
+	    	        	   {max: "250", text: "O3"}
+		            ],
+		            radius : 130
+		        }
+		    ],
+		    series : [
+		        {
+		            name: '实时空气质量',
+		            type: 'radar',
+		            itemStyle: {
+		                normal: {
+		                    areaStyle: {
+		                        type: 'default'
+		                    }
+		                }
+		            },
+		            data : [
+		             
+		                {
+		                	value : [43,101, 25, 0.6,121, 106],
+		                    name : '实时空气质量',
+		               
+		                }
+		            ]
+		        }
+		    ]
+	   
     	   
-    	    tooltip : {
-    	        trigger: 'axis'
-    	    },
-    	    legend: {
-    	        orient : 'vertical',
-    	        x : 'center',
-    	        y : 'top',
-    	        data:['实时空气质量']
-    	    },
-    	   
-    	    polar : [
-    	       {
-    	           indicator : [
-    	        	   {max: "250", text: "PM2.5"},
-    	        	   {max: "250", text: "PM10"},
-    	        	   {max: "250", text: "SO2"},
-    	        	   {max: "250", text: "CO"},
-    	        	   {max: "250", text: "NO2"},
-    	        	   {max: "250", text: "O3"}
-    	            ]
-    	        }
-    	    ],
-    	    calculable : true,
-    	    series : [
-    	        {
-    	            name: '实时空气质量',
-    	            type: 'radar',
-    	            data : [
-    	                {
-    	                    value : [43,101, 25, 0.6,121, 106],
-    	                    name : '实时空气质量',
-    	                    //在拐点处显示数值
-    	                    label: {
-    	                        normal: {
-    	                            show: true,
-    	                            formatter: (params) => {
-    	                                return params.value
-    	                            },
-    	                        },
-    	                    },
-    	
-    	                },
-    	               
-    	            ]
-    	        }
-    	    ]
-    	};
+    	 };
   
     
    // ;
@@ -352,11 +359,19 @@
     	
     
     	
-         //查询
+       //查询
+         let timer = 0
          $(document).on('click','#search',function(){
-        	 getdata()
+        	 let showType = $("#showType").val()
+        	 if(showType==1){
+        		 clearInterval(timer)
+        		 getdata() 
+        	 }else{
+        		 timer = setInterval(getdata,10000)
+        	 }
         	
-         });
+        	
+        });
         function getdata(){
         	 let showType = $("#showType").val()
         	 let method = showType==0?'dashboard':'radar'

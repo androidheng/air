@@ -12,16 +12,6 @@
 	<meta name="format-detection" content="telephone=no">	
     <link rel="stylesheet" href="<%=basePath%>assets/css/layui.css">
     <link rel="stylesheet" href="<%=basePath%>assets/css/view.css"/>
-   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=DDLwA2CBFGHRpxFzFx3K5KnBQtHP4hte"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-  
     <link rel="icon" href="/favicon.ico">
     <title>管理后台</title>
     <style>
@@ -32,177 +22,174 @@
 	
 		#container{
 		  	height:100%;
-        width:100%;
+            width:100%;
 		}
-    .btn{
-            width:14em;
-            margin-left:3.2rem;  
-            margin-top: 0.8rem; 
-        }
-        .circalOut{
-           width: 100px;
-           height: 100px;
-           border-radius: 50%;
-           background: orange;
-           position: relative;
-           margin:auto;
-          
-       }
-       .circalInner{
-           width: 80px;
-           height: 80px;
-           border-radius: 50%;
-           background: #999;
-           text-align: center;
-           padding-top:25px;
-           box-sizing:border-box;
-           position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%,-50%);
-       }
-       .air_top,.air_bottom{
-            display: flex;
-           text-align: center
-       }
+    
      
     </style>
 </head>
 <body class="layui-view-body">
-    <div class="layui-content" id="box" style="display:none">
-       <div class="layui-content" id="AirDetail" style="width:60%;margin:auto;padding:10px 0px">
-         <div class="air_top">
-                <div class="circalOut">
-                    <div class="circalInner">
-                          PM2.5 
-                         <div class="PM25">
-                            
-                         </div>
-                    </div>
-                </div>
-                <div class="circalOut">
-                    <div class="circalInner">
-                         PM10
-                         <div class="PM10">
-                            
-                         </div>
-                    </div>
-                 </div>
-                 <div class="circalOut" >
-                     <div class="circalInner">
-                          CO
-                        <div class="CO">
-                            
-                         </div>
-                      </div>
-                 </div>
-         </div>
-          <div class="air_bottom" style="margin-top:10%">
-                <div class="circalOut">
-                    <div class="circalInner">
-                         NO2
-                        <div class="NO2">
-                            
-                         </div>
-                    </div>
-                </div>
-                <div class="circalOut">
-                    <div class="circalInner">
-                       O3
-                      <div class="O3">
-                            
-                         </div>
-                    </div>
-                </div>
-                <div class="circalOut">
-                    <div class="circalInner">
-                       SO2
-                       <div class="SO2">
-                            
-                         </div>
-                    </div>
-                </div>
-          </div>
-         </div>
-     </div>
  <div class="wrapper">
-	<div id="container" style="width: 100%;height:100%;"></div>
+     <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                     <div class="demoTable">
+                        <div class="layui-inline" style="padding:20px;">
+                                                                                数据类型                                                
+                         <div class="layui-inline">
+                          <form class="layui-form" action="">
+                             <select  id="datatype" lay-verify="required"></select>
+                          </form>
+                         
+                         </div>
+                                                                                 
+                        </div>
+                      <button class="layui-btn" id="search">查询</button>
+                      </div>
+                      <div id="container" style="width: 100%;height:100%;"></div>
+                    
+                    <table id="demo" lay-filter="demo" ></table>
+                </div>
+            </div>
+        </div>
+	
 	
   </div>
-  
-
-
-
-
-
- 
-
- 
- 
-
-<script src="<%=basePath%>assets/layui.all.js"></script>
+ <script src="<%=basePath%>assets/layui.all.js"></script>
+ <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
 
 <script type="text/javascript">
 var myChart = echarts.init(document.getElementById('container'));   
-let hotData = [
-    [120.865048,32.015055,273,'南通'],
-    [119.942196,31.767865,100,'常州'],
-    [118.798244,32.067442,80,'南京'],
-    [119.418972,32.3811142,180,'扬州'],
-    [120.297878,31.558637,110,'无锡'],
-    [119.449184,32.201174,90,'镇江'],
-    [108.987453,34.292389,200,'西安'],
-]
 
-	option = {
-	   /* title: {
-	        text: '全国主要城市空气质量',
-	        subtext: 'data from PM25.in',
-	        sublink: 'http://www.pm25.in',
-	        left: 'center',
-	        textStyle: {
-	            color: '#fff'
-	        }
-	    },*/
-	    backgroundColor: '#404a59',
-	    visualMap: {
-	        min: 0,
-	        max: 300,
-	        splitNumber: 5,
-	        inRange: {
-	            color: ['#d94e5d','#eac736','#50a3ba'].reverse()
-	        },
-	        textStyle: {
-	            color: '#fff'
-	        }
-	    },
-	    geo: {
-	        map: 'china',
-	        zoom:1, 
-	        roam: false,
-	        label: {
-	            normal: {
-	              show: true,
-	              textStyle: {
-	              //  color: "#F0F8FB"
-	              }
-	            },
-	           
-	          },
-	         
-	    },
-	    series: [{
-	        name: 'AQI',
-	        type: 'heatmap',
-	        coordinateSystem: 'geo',
-	        data:hotData
-	    }]
-	};
+
+
+option = {
+    backgroundColor: '#1b1b1b',
+    title : {
+        text: '热力图结合地图',
+        x:'center',
+        textStyle: {
+            color: 'white'
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: '{b}'
+    },
+    toolbox: {
+        show : true,
+        orient : 'vertical',
+        x: 'right',
+        y: 'center',
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+           
+        }
+    },
+    visualMap: {
+        type: 'piecewise',
+        min: 0,
+        max: 1,
+        calculable: true,
+        realtime: false,
+        splitNumber: 8,
+        inRange: {
+            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+        }
+    },
+    series : [
+        {
+            name: '北京',
+            type: 'map',
+            mapType: 'china',
+            roam: true,
+            hoverable: false,
+            data:[],
+            heatmap: {
+                minAlpha: 0.1,
+                data: []
+            },
+            itemStyle: {
+                normal: {
+                    borderColor:'rgba(100,149,237,0.6)',
+                    borderWidth:0.5,
+                    areaStyle: {
+                        color: '#1b1b1b'
+                    }
+                }
+            }
+        }
+    ]
+};
+layui.use('table', function(){
+	 var table = layui.table,form = layui.form,$=layui.$;
+	//重新渲染表单
+	 getDataType()
+	
+     function renderForm(){
+      layui.use('form', function(){
+      var form = layui.form;//高版本建议把括号去掉，有的低版本，需要加()
+      form.render();
+      });
+     }
+	 //获取数据下拉框
+     function getDataType(){
+    	 $.ajax({
+             url:"<%=basePath%>base/findAll",
+             type:'post',//method请求方式，get或者post
+             dataType:'json',//预期服务器返回的数据类型
+             contentType: "application/json; charset=utf-8",
+             success:function(res){//res为相应体,function为回调函数
+            	
+                 let options = "<option value=''></option>"
+                 res.forEach(item=>{
+                	 options+="<option value='" + item.id + "'>" + item.typename + "</option>";
+                 })
+                
+                 $("#datatype").html(options)
+                 
+               
+                 renderForm()
+             },
+             error:function(){
+              
+             }
+         });
+     }
+	
+     //查询
+     $(document).on('click','#search',function(){
+    	 getdata()
+     });
+     function getdata(){
+    	 let datatype = $("#datatype").val()
+    	
+    	 $.ajax({
+             url:"<%=basePath%>data/heatmap?bid="+datatype,
+             type:'post',//method请求方式，get或者post
+             dataType:'json',//预期服务器返回的数据类型
+             contentType: "application/json; charset=utf-8",
+             success:function(res){//res为相应体,function为回调函数
+            	 option.series[0].heatmap.data = res
+                 myChart.setOption(option)
+            	
+            	
+             },
+             error:function(){
+              
+             }
+         });
+     }
+    
+})
+// myChart.setOption(option)
                     
                     
-myChart.setOption(option)
-var bmap = myChart.getModel().getComponent('bmap').getBMap();
-bmap.addControl(new BMap.MapTypeControl());
+
+//var bmap = myChart.getModel().getComponent('bmap').getBMap();
+//bmap.addControl(new BMap.MapTypeControl());
 	
 
 
