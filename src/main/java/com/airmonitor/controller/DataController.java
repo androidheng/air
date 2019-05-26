@@ -310,6 +310,69 @@ public class DataController {
 		}
 		return new Result(false, "请先登录");
 	}
+	@RequestMapping(value="/heatmap",produces = "application/json;charset=UTF-8")
+	public Object heatmap(HttpSession session,Integer bid){
+		String dates=DateUtils.getCurrentDay();
+		TbUser user=(TbUser) session.getAttribute("user");
+		user=new TbUser();
+//		user.setType(1);
+		String searchId;
+		if(user!=null){ 
+			List<TbData> datas=dataService.findHeadmap(dates);
+			List<Object> resultList=new ArrayList<>();
+			if(bid==1) {
+				for (TbData tbData : datas) {
+					List<Object> list=new ArrayList<>();
+					list.add(tbData.getLat());
+					list.add(tbData.getLon());
+					list.add(tbData.getPm2());
+					resultList.add(list);
+				}
+			}else if(bid==2) {
+				for (TbData tbData : datas) {
+					List<Object> list=new ArrayList<>();
+					list.add(tbData.getLat());
+					list.add(tbData.getLon());
+					list.add(tbData.getPm10());
+					resultList.add(list);
+				}
+			}else if(bid==3) {
+				for (TbData tbData : datas) {
+					List<Object> list=new ArrayList<>();
+					list.add(tbData.getLat());
+					list.add(tbData.getLon());
+					list.add(tbData.getSo2());
+					resultList.add(list);
+				}
+			}else if(bid==4) {
+				for (TbData tbData : datas) {
+					List<Object> list=new ArrayList<>();
+					list.add(tbData.getLat());
+					list.add(tbData.getLon());
+					list.add(tbData.getCo());
+					resultList.add(list);
+				}
+			}else if(bid==5) {
+				for (TbData tbData : datas) {
+					List<Object> list=new ArrayList<>();
+					list.add(tbData.getLat());
+					list.add(tbData.getLon());
+					list.add(tbData.getNo2());
+					resultList.add(list);
+				}
+			}else if(bid==6) {
+				for (TbData tbData : datas) {
+					List<Object> list=new ArrayList<>();
+					list.add(tbData.getLat());
+					list.add(tbData.getLon());
+					list.add(tbData.getO3());
+					resultList.add(list);
+				}
+			}
+			return resultList;		
+		}
+		return new Result(false, "请先登录");
+	}
 	/**
 	 * 实时数据折线图
 	 * @param session

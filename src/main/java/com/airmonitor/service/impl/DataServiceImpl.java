@@ -192,5 +192,11 @@ public class DataServiceImpl implements DataService {
 				return new PageResult(0,"",page.getTotal(), page.getResult());
 			}
 		}
+
+		@Override
+		public List<TbData> findHeadmap(String dates) {
+			
+			return dataMapper.findHeadmap(dates);
+		}
 	
 }

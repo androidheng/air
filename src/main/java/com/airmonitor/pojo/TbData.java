@@ -28,7 +28,10 @@ public class TbData {
     private String createtime;
 
     private String main;
+    private String lat;
 
+    private String lon;
+    
     public Integer getId() {
         return id;
     }
@@ -140,4 +143,22 @@ public class TbData {
     public void setMain(String main) {
         this.main = main == null ? null : main.trim();
     }
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLon() {
+		return lon;
+	}
+
+	public void setLon(String lon) {
+		this.lon = lon;
+	}
+    
+    
 }

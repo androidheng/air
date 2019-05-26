@@ -49,4 +49,6 @@ public interface TbDataMapper {
 //    List<Map<String, Object>> findExcelRealData(@Param("cid") Integer cid,@Param("dates") String dates);
     
 	List<Map<String, Object>> findDataObject();
+
+	List<TbData> findHeadmap(@Param("dates") String dates);
 }

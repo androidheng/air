@@ -16,6 +16,8 @@
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="VARCHAR" />
     <result column="main" property="main" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -406,5 +408,11 @@
     WHERE a.cid=#{cid,jdbcType=INTEGER}  
     AND DATE_FORMAT(a.`createtime`,'%Y')=#{date,jdbcType=VARCHAR}
     ORDER BY a.`createtime` DESC
+  </select>
+  <select id="findHeadmap"  resultMap="BaseResultMap">
+    SELECT * FROM tb_data a,tb_city b
+	WHERE a.cid=b.id
+	AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{dates,jdbcType=VARCHAR} 
+	GROUP BY a.cid 
   </select>
 </mapper>

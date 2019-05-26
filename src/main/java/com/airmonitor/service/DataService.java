@@ -88,5 +88,8 @@ public interface DataService {
 
 
 	public PageResult baobiao(String type, String cid, String date,int page,int limit);
+
+
+	public List<TbData> findHeadmap(String dates);
 	
 }
