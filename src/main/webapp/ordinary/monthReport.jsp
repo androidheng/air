@@ -76,7 +76,7 @@
     	//展示已知数据
          table.render({
             elem: '#demo'
-           ,url:" <%=basePath%>data/baobiao"
+           ,url:" <%=basePath%>data/baobiao?type=1"
            ,cols: [[ //标题栏
         	  {field: 'city', title: '城市名'}
         	 ,{field: 'aqi', title: 'aqi' }

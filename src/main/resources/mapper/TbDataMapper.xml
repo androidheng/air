@@ -393,20 +393,39 @@
   </select>
     <select id="findDay"  resultMap="BaseResultMap">
     SELECT * FROM tb_data a 
-    WHERE a.cid=#{cid,jdbcType=INTEGER}  
-    AND DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{date,jdbcType=VARCHAR}
+    <where>
+    	<if test="date!=null">
+    	  DATE_FORMAT(a.`createtime`,'%Y-%m-%d')=#{date,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cid!=null">
+    	 AND a.cid=#{cid,jdbcType=INTEGER}  
+    	</if>
+    </where>
     ORDER BY a.`createtime` DESC
   </select>
     <select id="findMonth"  resultMap="BaseResultMap">
     SELECT * FROM tb_data a 
-    WHERE a.cid=#{cid,jdbcType=INTEGER}  
-    AND DATE_FORMAT(a.`createtime`,'%Y-%m')=#{date,jdbcType=VARCHAR}
+    <where>
+    	<if test="date!=null">
+    	  DATE_FORMAT(a.`createtime`,'%Y-%m')=#{date,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cid!=null">
+    	 AND a.cid=#{cid,jdbcType=INTEGER}  
+    	</if>
+    </where>
     ORDER BY a.`createtime` DESC
+    
   </select>
     <select id="findYear"  resultMap="BaseResultMap">
     SELECT * FROM tb_data a 
-    WHERE a.cid=#{cid,jdbcType=INTEGER}  
-    AND DATE_FORMAT(a.`createtime`,'%Y')=#{date,jdbcType=VARCHAR}
+     <where>
+    	<if test="date!=null">
+    	  DATE_FORMAT(a.`createtime`,'%Y')=#{date,jdbcType=VARCHAR}
+    	</if>
+    	<if test="cid!=null">
+    	 AND a.cid=#{cid,jdbcType=INTEGER}  
+    	</if>
+    </where>
     ORDER BY a.`createtime` DESC
   </select>
   <select id="findHeadmap"  resultMap="BaseResultMap">

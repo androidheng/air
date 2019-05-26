@@ -953,13 +953,13 @@ public class DataController {
 	}
 	
 	@RequestMapping(value="/baobiao",produces = "application/json;charset=UTF-8")
-	public PageResult baobiao(String date,HttpSession session,String cid,String type,int page,int limit){
+	public PageResult baobiao(String date,HttpSession session,Integer cid,String type,int page,int limit){
 		TbUser user=(TbUser) session.getAttribute("user");
-		String searchId;
+		Integer searchId;
 		//TbUser user=(TbUser) session.getAttribute("user");
 		if(user!=null){
 			if(user.getType()==0) {
-				searchId=user.getCid()+"";
+				searchId=user.getCid();
 			}else {
 				searchId=cid;
 			}	
@@ -978,15 +978,15 @@ public class DataController {
 	
 	@RequestMapping("/exportbaobiao")
 	@ResponseBody
-	public void exportbaobiao(HttpServletRequest request,HttpServletResponse response,HttpSession session,String cid,String type,String date) throws Exception{
+	public void exportbaobiao(HttpServletRequest request,HttpServletResponse response,HttpSession session,Integer cid,String type,String date) throws Exception{
 		List<Map<String,Object>> lists=new ArrayList<>();
 		if(StringUtils.isEmpty(date))
 		  date=DateUtils.getCurrentDay();
 		TbUser user=(TbUser) session.getAttribute("user");
-		String searchId;
+		Integer searchId;
 		if(user!=null){ 
 			if(user.getType()==0) {
-				searchId=user.getCid()+"";
+				searchId=user.getCid();
 			}else {
 				searchId=cid;
 			}	
