@@ -323,49 +323,49 @@ public class DataController {
 			if(bid==1) {
 				for (TbData tbData : datas) {
 					List<Object> list=new ArrayList<>();
-					list.add(tbData.getLat());
-					list.add(tbData.getLon());
-					list.add(tbData.getPm2());
+					list.add(Double.parseDouble(tbData.getLat()));
+					list.add(Double.parseDouble(tbData.getLon()));
+					list.add(Double.parseDouble(tbData.getPm2()));
 					resultList.add(list);
 				}
 			}else if(bid==2) {
 				for (TbData tbData : datas) {
 					List<Object> list=new ArrayList<>();
-					list.add(tbData.getLat());
-					list.add(tbData.getLon());
-					list.add(tbData.getPm10());
+					list.add(Double.parseDouble(tbData.getLat()));
+					list.add(Double.parseDouble(tbData.getLon()));
+					list.add(Double.parseDouble(tbData.getPm10()));
 					resultList.add(list);
 				}
 			}else if(bid==3) {
 				for (TbData tbData : datas) {
 					List<Object> list=new ArrayList<>();
-					list.add(tbData.getLat());
-					list.add(tbData.getLon());
-					list.add(tbData.getSo2());
+					list.add(Double.parseDouble(tbData.getLat()));
+					list.add(Double.parseDouble(tbData.getLon()));
+					list.add(Double.parseDouble(tbData.getSo2()));
 					resultList.add(list);
 				}
 			}else if(bid==4) {
 				for (TbData tbData : datas) {
 					List<Object> list=new ArrayList<>();
-					list.add(tbData.getLat());
-					list.add(tbData.getLon());
-					list.add(tbData.getCo());
+					list.add(Double.parseDouble(tbData.getLat()));
+					list.add(Double.parseDouble(tbData.getLon()));
+					list.add(Double.parseDouble(tbData.getCo()));
 					resultList.add(list);
 				}
 			}else if(bid==5) {
 				for (TbData tbData : datas) {
 					List<Object> list=new ArrayList<>();
-					list.add(tbData.getLat());
-					list.add(tbData.getLon());
-					list.add(tbData.getNo2());
+					list.add(Double.parseDouble(tbData.getLat()));
+					list.add(Double.parseDouble(tbData.getLon()));
+					list.add(Double.parseDouble(tbData.getNo2()));
 					resultList.add(list);
 				}
 			}else if(bid==6) {
 				for (TbData tbData : datas) {
 					List<Object> list=new ArrayList<>();
-					list.add(tbData.getLat());
-					list.add(tbData.getLon());
-					list.add(tbData.getO3());
+					list.add(Double.parseDouble(tbData.getLat()));
+					list.add(Double.parseDouble(tbData.getLon()));
+					list.add(Double.parseDouble(tbData.getO3()));
 					resultList.add(list);
 				}
 			}
