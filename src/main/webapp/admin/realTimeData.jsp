@@ -397,6 +397,7 @@
         		 clearInterval(timer)
         		 getdata() 
         	 }else{
+        		 getdata()
         		 timer = setInterval(getdata,10000)
         	 }
         	
