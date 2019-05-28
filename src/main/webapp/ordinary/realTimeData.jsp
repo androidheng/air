@@ -385,7 +385,7 @@
                 	 if(showType==1){
                 		 radarOption.legend.data = res.legend.data
                 		 radarOption.polar = res.polar
-                		 radarOption.series[0].data.value = res.data
+                		 radarOption.series[0].data[0].value = res.data[0].data
                 		 radarChart.setOption(radarOption)
                 		 $("#radarChart").show()
                 		 $("#meterChart").hide()
@@ -400,7 +400,7 @@
                     	 $("#radarChart").hide()
                 		 $("#meterChart").show()
                 	 }
-                	 console.log(res)
+                	
                 	//option.xAxis.data = res.data;
                 	
                  },
